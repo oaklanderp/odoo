@@ -65,7 +65,7 @@ spec:
     kind: Deployment
     name: web-app
   minReplicas: 1
-  maxReplicas: 12
+  maxReplicas: 2
 #in  prodction   maxReplicas: 12  should  beacuse on my case the quota is limited.                       
 
   metrics:

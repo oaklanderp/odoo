@@ -54,7 +54,7 @@ spec:
             claimName: nfs     
 ---                      
          
-apiVersion: autoscaling/v1
+apiVersion: autoscaling/v2beta2
 kind: HorizontalPodAutoscaler
 metadata:
   name: web-app

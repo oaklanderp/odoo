@@ -43,7 +43,7 @@ spec:
                  key: postgres-password
    
 
-          - name: DB_PORT_5432_TCP_ADDR
+         - name: DB_PORT_5432_TCP_ADDR
             valueFrom:
                configMapKeyRef:
                  name: postgres-configmap  

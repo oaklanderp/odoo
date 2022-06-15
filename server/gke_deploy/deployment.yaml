@@ -29,18 +29,18 @@ spec:
 #when  go to prodction  must use limits cpu: 1   requests: cpu: 0.5 beacuse on my case the quota is limited.       
                  
 
-          env:
-          - name: DB_ENV_POSTGRES_USER
-            valueFrom:
-               secretKeyRef:
-                 name: postgres-secret   
-                 key: postgres-username
+#          env:
+#          - name: DB_ENV_POSTGRES_USER
+#            valueFrom:
+#               secretKeyRef:
+#                 name: postgres-secret   
+#                 key: postgres-username
 
-         - name: DB_ENV_POSTGRES_PASSWORD
-            valueFrom:
-               secretKeyRef:
-                 name: postgres-secret    
-                 key: postgres-password
+#         - name: DB_ENV_POSTGRES_PASSWORD
+#            valueFrom:
+#               secretKeyRef:
+#                 name: postgres-secret    
+#                 key: postgres-password
    
 
 #          - name: DB_PORT_5432_TCP_ADDR

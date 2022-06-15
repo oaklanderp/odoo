@@ -34,14 +34,12 @@ spec:
             valueFrom:
                secretKeyRef:
                  name: postgres-secret   
-#                 key: POSTGRES_USER
                  key: postgres-username
 
           - name: DB_ENV_POSTGRES_PASSWORD
             valueFrom:
                secretKeyRef:
-                 name: postgres-secret   
-#                 key: POSTGRES_PASSWORD   
+                 name: postgres-secret    
                  key: postgres-password
    
 
@@ -69,8 +67,8 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: web-app
-  minReplicas: 1
-  maxReplicas: 2
+  minReplicas: 2
+  maxReplicas: 4
 #in  prodction   maxReplicas: 12  should  beacuse on my case the quota is limited.                       
 
   metrics:

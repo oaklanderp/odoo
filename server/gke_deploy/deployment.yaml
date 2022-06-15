@@ -36,18 +36,18 @@ spec:
                  name: postgres-secret   
                  key: postgres-username
 
-         - name: DB_ENV_POSTGRES_PASSWORD
-            valueFrom:
-               secretKeyRef:
-                 name: postgres-secret    
-                 key: postgres-password
+          - name: DB_ENV_POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret    
+                  key: postgres-password
    
 
-         - name: DB_PORT_5432_TCP_ADDR
+          - name: DB_PORT_5432_TCP_ADDR
             valueFrom:
-               configMapKeyRef:
-                 name: postgres-configmap  
-                 key: database_url                      
+                configMapKeyRef:
+                  name: postgres-configmap  
+                  key: database_url                      
           volumeMounts:
             - name: my-pvc-nfs
               mountPath: "/mnt/data"

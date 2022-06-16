@@ -30,28 +30,28 @@ spec:
                  
 
           env:
-          #- name: DB_ENV_POSTGRES_USER
-            #valueFrom:
-               #secretKeyRef:
-                 #name: postgres-secret   
-                 #key: postgres_user
-          #- name: DB_ENV_POSTGRES_PASSWORD
-            #valueFrom:
-               #secretKeyRef:
-                 #name: postgres-secret   
-                 #key: POSTGRES_PASSWORD   
-          #- name: DB_PORT_5432_TCP_ADDR
-            #valueFrom:
-               #configMapKeyRef:
-                 #name: postgres-configmap  
-                 #key: database_url                      
+          - name: DB_ENV_POSTGRES_USER
+            valueFrom:
+               secretKeyRef:
+                 name: postgres-secret   
+                 key: postgres-user
+          - name: DB_ENV_POSTGRES_PASSWORD
+            valueFrom:
+               secretKeyRef:
+                 name: postgres-secret   
+                 key: POSTGRES-PASSWORD   
+          - name: DB_PORT_5432_TCP_ADDR
+            valueFrom:
+               configMapKeyRef:
+                 name: postgres-configmap  
+                 key: database_url                      
           volumeMounts:
             - name: my-pvc-nfs
               mountPath: "/mnt/data"
-      volumes:
-        - name: my-pvc-nfs
-          persistentVolumeClaim:
-            claimName: nfs     
+      #volumes:
+        #- name: my-pvc-nfs
+          #persistentVolumeClaim:
+            #claimName: nfs     
 ---                      
          
 apiVersion: autoscaling/v2beta2

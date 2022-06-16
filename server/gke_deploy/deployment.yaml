@@ -48,13 +48,13 @@ spec:
 #                configMapKeyRef:
 #                  name: postgres-configmap  
 #                  key: database_url                      
-          volumeMounts:
-            - name: my-pvc-nfs
-              mountPath: "/mnt/data"
-      volumes:
-        - name: my-pvc-nfs
-          persistentVolumeClaim:
-            claimName: nfs     
+#          volumeMounts:
+#            - name: my-pvc-nfs
+#              mountPath: "/mnt/data"
+#      volumes:
+#        - name: my-pvc-nfs
+#          persistentVolumeClaim:
+#            claimName: nfs     
 ---                      
          
 apiVersion: autoscaling/v2beta2

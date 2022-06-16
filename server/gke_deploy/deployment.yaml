@@ -34,12 +34,12 @@ spec:
             valueFrom:
                secretKeyRef:
                  name: postgres-secret   
-                 key: postgres-username
+                 key: POSTGRES_USER
           - name: DB_ENV_POSTGRES_PASSWORD
             valueFrom:
                secretKeyRef:
                  name: postgres-secret   
-                 key: postgres-password   
+                 key: POSTGRES_PASSWORD   
           - name: DB_PORT_5432_TCP_ADDR
             valueFrom:
                configMapKeyRef:

@@ -29,7 +29,7 @@ spec:
 #when  go to prodction  must use limits cpu: 1   requests: cpu: 0.5 beacuse on my case the quota is limited.       
                  
 
-          #env:
+          env:
           #- name: DB_ENV_POSTGRES_USER
             #valueFrom:
                #secretKeyRef:

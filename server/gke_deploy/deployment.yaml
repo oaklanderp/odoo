@@ -15,6 +15,7 @@ spec:
     metadata:
       labels:
         app: web-app
+        namespace: prod
     spec:
       containers:
         - name: web-app

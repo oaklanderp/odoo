@@ -12,6 +12,7 @@ spec:
       app: web-app
   template:
     metadata:
+      namespace: prod
       labels:
         app: web-app
     spec:

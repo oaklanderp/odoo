@@ -20,6 +20,13 @@ spec:
       containers:
         - name: web-app
           image: REGISTRY_HOSTNAME/arboreal-cosmos-346616/IMAGE:GITHUB_SHA
+          volumeMounts:
+          - mountPath: "/mnt/data"
+            name: my-pvc          
+      volumes:
+        - name: my-pvc
+          persistentVolumeClaim:
+            claimName: nfs           
           #image: gcr.io/light-quest-349811/web-app@sha256:7cbc51fc3fb2954521d016ec6cd0a4ca5ee5f1261c961c46754f63b518ad54ce
           ports:
             - containerPort: 8069
@@ -49,10 +56,10 @@ spec:
           #volumeMounts:
             #- name: my-pvc
               #mountPath: "/mnt/data"
-      volumes:
-        - name: my-pvc
-          persistentVolumeClaim:
-            claimName: nfs     
+      #volumes:
+        #- name: my-pvc
+          #persistentVolumeClaim:
+            #claimName: nfs     
 ---                      
          
 apiVersion: autoscaling/v2beta2

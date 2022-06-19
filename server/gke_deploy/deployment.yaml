@@ -30,11 +30,7 @@ spec:
               cpu: 200m         
           volumeMounts:
           - mountPath: "/mnt/data"
-            name: my-pvc                
-      volumes:
-        - name: my-pvc
-          persistentVolumeClaim:
-            claimName: nfs               
+            name: my-pvc                               
 #when  go to prodction  must use limits cpu: 1   requests: cpu: 0.5 beacuse on my case the quota is limited.#       #
                  
           env:
@@ -56,10 +52,10 @@ spec:
           #volumeMounts:
             #- name: my-pvc
               #mountPath: "/mnt/data"
-      #volumes:
-        #- name: my-pvc
-          #persistentVolumeClaim:
-            #claimName: nfs     
+      volumes:
+        - name: my-pvc
+          persistentVolumeClaim:
+            claimName: nfs     
 ---                      
          
 apiVersion: autoscaling/v2beta2

@@ -59,13 +59,14 @@ apiVersion: autoscaling/v2beta2
 kind: HorizontalPodAutoscaler
 metadata:
   name: web-app
+  namespace: prod
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
     name: web-app
-  minReplicas: 1
-  maxReplicas: 2
+  minReplicas: 2
+  maxReplicas: 4
 #in  prodction   maxReplicas: 12  should  beacuse on my case the quota is limited.                       
 
   metrics:

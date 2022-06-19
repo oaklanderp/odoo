@@ -12,7 +12,6 @@ spec:
       app: web-app
   template:
     metadata:
-      namespace: prod
       labels:
         app: web-app
     spec:
@@ -46,21 +45,26 @@ spec:
                configMapKeyRef:
                  name: postgres-configmap  
                  key: database_url                      
-     
+          volumeMounts:
+            - name: my-pvc-nfs
+              mountPath: "/mnt/data"
+      volumes:
+        - name: my-pvc-nfs
+          persistentVolumeClaim:
+            claimName: nfs     
 ---                      
          
 apiVersion: autoscaling/v2beta2
 kind: HorizontalPodAutoscaler
 metadata:
   name: web-app
-  namespace: prod
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
     name: web-app
   minReplicas: 1
-  maxReplicas: 3
+  maxReplicas: 2
 #in  prodction   maxReplicas: 12  should  beacuse on my case the quota is limited.                       
 
   metrics:
@@ -75,7 +79,7 @@ spec:
       name: memory
       target:
         type: AverageValue
-        averageValue: 300Mi
+        averageValue: 150Mi
 
 
 

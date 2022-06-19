@@ -49,7 +49,7 @@ spec:
             - name: my-pvc-nfs1
               mountPath: "/mnt/data"
       volumes:
-        - name: my-pvc-nfs
+        - name: my-pvc-nfs1
           persistentVolumeClaim:
             claimName: nfs     
 ---                      

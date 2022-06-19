@@ -23,9 +23,9 @@ spec:
             - containerPort: 8069
           resources:
             limits:
-              cpu: 300m            
+              cpu: 500m            
             requests:
-              cpu: 200m         
+              cpu: 400m         
 #when  go to prodction  must use limits cpu: 1   requests: cpu: 0.5 beacuse on my case the quota is limited.#       
                  
 
@@ -45,13 +45,13 @@ spec:
                configMapKeyRef:
                  name: postgres-configmap  
                  key: database_url                      
-          #volumeMounts:
-            #- name: my-pvc-nfs
-              #mountPath: "/mnt/data"
-      #volumes:
-        #- name: my-pvc-nfs
-          #persistentVolumeClaim:
-            #claimName: nfs     
+          volumeMounts:
+            - name: my-pvc-nfs
+              mountPath: "/mnt/data"
+      volumes:
+        - name: my-pvc-nfs
+          persistentVolumeClaim:
+            claimName: nfs     
 ---                      
          
 apiVersion: autoscaling/v2beta2

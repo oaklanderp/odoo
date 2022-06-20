@@ -27,10 +27,7 @@ spec:
             limits:
               cpu: 300m            
             requests:
-              cpu: 200m         
-          volumeMounts:
-          - mountPath: "/mnt/data"
-            name: my-pvc                               
+              cpu: 200m                                        
 #when  go to prodction  must use limits cpu: 1   requests: cpu: 0.5 beacuse on my case the quota is limited.#       #
                  
           env:
@@ -49,9 +46,9 @@ spec:
                configMapKeyRef:
                  name: postgres-configmap  
                  key: database_url                      
-          #volumeMounts:
-            #- name: my-pvc
-              #mountPath: "/mnt/data"
+          volumeMounts:
+            - name: my-pvc
+              mountPath: "/mnt/data"
       volumes:
         - name: my-pvc
           persistentVolumeClaim:

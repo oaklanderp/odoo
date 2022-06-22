@@ -29,10 +29,10 @@ metadata:
 spec:
   tls:
     - hosts:
-      - $GH_USERNAME.stage.inharf.xyz
+      - GH_USERNAME.stage.inharf.xyz
       secretName: letsencrypt-prod
   rules:
-  - host: $GH_USERNAME.stage.inharf.xyz
+  - host: GH_USERNAME.stage.inharf.xyz
     http:
       paths:
         - path: /

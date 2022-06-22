@@ -31,7 +31,7 @@ spec:
       - new.stage.inharf.xyz
       secretName: odoo-tls
   rules:
-  - host: checkraiser.tinmua.vn
+  - host: new.stage.inharf.xyz
     http:
       paths:
       - backend:

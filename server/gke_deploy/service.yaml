@@ -15,25 +15,30 @@ spec:
     app: "web-app"
   type: "LoadBalancer"
 ---
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: odoo-ingress
+  name: odoo-ingress-actions
+  namespace: prod
   annotations:
     kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/limit-connections: '10'
     nginx.ingress.kubernetes.io/limit-rpm: '60'
     nginx.ingress.kubernetes.io/service-upstream: "true"
-    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    cert-manager.io/issuer: "letsencrypt-prod"
 spec:
   tls:
     - hosts:
       - new.stage.inharf.xyz
-      secretName: odoo-tls
+      secretName: letsencrypt-prod
   rules:
   - host: new.stage.inharf.xyz
     http:
       paths:
-      - backend:
-          serviceName: web-app-service
-          servicePort: 80  
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: web-app-service
+              port:
+                number: 8069

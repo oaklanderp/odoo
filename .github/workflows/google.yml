@@ -22,6 +22,7 @@ env:
   GKE_EMAIL: ${{ secrets.GKE_EMAIL }}
   GITHUB_SHA: ${{ github.sha }}
   GKE_ZONE: ${{ secrets.GKE_ZONE }}
+  GKE_GCR:  ${{ secrets.GKE_GCR }}
   GKE_CLUSTER: cluster-1
   IMAGE: web-app
   REGISTRY_HOSTNAME: gcr.io
@@ -94,6 +95,7 @@ jobs:
           sed -i -e 's/IMAGE/'"$IMAGE"'/' ./gke_deploy/deployment.yaml
           sed -i -e 's/GITHUB_SHA/'"$GITHUB_SHA"'/' ./gke_deploy/deployment.yaml
           sed -i -e 's/GH_USERNAME/'"${GITHUB_ACTOR}"'/' ./gke_deploy/service.yaml
+          sed -i -e 's/GKE_GCR/'"$GKE_GCR"'/' ./gke_deploy/deployment.yaml
           ./kustomize build ./gke_deploy | kubectl apply -f -
           kubectl rollout status deployment/$DEPLOYMENT_NAME -n prod
           kubectl get services -o wide -n prod

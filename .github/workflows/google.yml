@@ -42,18 +42,14 @@ jobs:
           path: ${{ env.GITHUB_REPOSITORY_SLUG_URL }}    
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Odoo Enterprise
-        uses: odoo/enterprise
+      - name: Odoo Enterprise   
+        uses: actions/checkout@v3
         with:
-          owner: 'odoo'
-          repository: 'enterprise'
-          access-token: ${{ secrets.ACCESS_TOKEN }}      
-        # uses: actions/checkout@v3
-        # # with:
-        # #   repository: odoo/enterprise
-        # #   token: ${{ secrets.GITHUB_TOKEN }}
-        # #   path: server/addons_dependencies
-        # #   ref: ${{ env.GITHUB_REF_SLUG }}        
+          repository: odoo/enterprise
+          # token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.ACTIONS_PAT }}
+          path: server/addons_dependencies
+          ref: ${{ env.GITHUB_REF_SLUG }}        
 
       # Setup gcloud CLI
      # - uses: GoogleCloudPlatform/github-actions/setup-gcloud@v0.6.0

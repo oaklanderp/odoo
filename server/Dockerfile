@@ -11,7 +11,7 @@ RUN mkdir -p /mount/data
 RUN chmod  777  /mount/data
 
 
-RUN  apt-get update -y && apt-get  install git -y && git clone https://oaklanderp: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@github.com/odoo/enterprise --depth 1 --branch 15.0 /mnt/addons_dependencies/enterprise
+#RUN  apt-get update -y && apt-get  install git -y && git clone https://oaklanderp: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@github.com/odoo/enterprise --depth 1 --branch 15.0 /mnt/addons_dependencies/enterprise
 
 
 
@@ -27,7 +27,7 @@ COPY image-configs/dev.conf /etc/odoo/odoo.conf
 
 
 COPY custom_addons /mnt/custom_addons
-#COPY addons_dependencies /mnt/addons_dependencies
+COPY addons_dependencies /mnt/addons_dependencies
 #COPY ./addons_extra /mnt/addons_extra
 EXPOSE 8069 8071 8072
 

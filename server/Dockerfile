@@ -11,7 +11,7 @@ RUN mkdir -p /mount/data
 RUN chmod  777  /mount/data
 
 
-RUN  apt-get update -y && apt-get  install git -y && git clone https://oaklanderp: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@github.com/odoo/enterprise --depth 1 --branch 15.0 /mnt/addons_dependencies/enterprise
+RUN  apt-get update -y && apt-get  install git -y && git clone https://oaklanderp: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@github.com/odoo/enterprise --depth 1 --branch 15.0 /mnt/addons_dependencies/enterprise
 
 
 

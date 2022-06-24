@@ -11,6 +11,11 @@ RUN mkdir -p /mount/data
 RUN chmod  777  /mount/data
 
 
+#  sudo apt install git && git clone https://oaklanderp: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@github.com/odoo/enterprise --depth 1 --branch 15.0 newtest
+
+
+
+
 
 
 RUN pip3 install redis
@@ -22,7 +27,7 @@ COPY image-configs/dev.conf /etc/odoo/odoo.conf
 
 
 COPY custom_addons /mnt/custom_addons
-COPY addons_dependencies /mnt/addons_dependencies
+#COPY addons_dependencies /mnt/addons_dependencies
 #COPY ./addons_extra /mnt/addons_extra
 EXPOSE 8069 8071 8072
 

@@ -37,13 +37,13 @@ jobs:
       ### Dependencies
       - uses: rlespinasse/github-slug-action@v4
       - name: Checkout local
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           path: ${{ env.GITHUB_REPOSITORY_SLUG_URL }}    
       - name: Checkout
         uses: actions/checkout@v3
       - name: Odoo Enterprise
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           repository: odoo/enterprise
           token: ${{ secrets.GITHUB_TOKEN }}

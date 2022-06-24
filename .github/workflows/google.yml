@@ -45,7 +45,8 @@ jobs:
       - name: Odoo Enterprise   
         uses: actions/checkout@v2
         with:
-          repository: odoo/enterprise.git
+          # repository: odoo/enterprise.git
+          repository: GuillaumeFalourd/clone-github-repo-action
           # token: ${{ secrets.GITHUB_TOKEN }}
           # token: ${{ secrets.ACTIONS_PAT }}
           token: ${{ secrets.GITHUB_TOKEN }}

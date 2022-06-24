@@ -35,19 +35,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       ### Dependencies
-      - uses: rlespinasse/github-slug-action@v4
+      - uses: rlespinasse/github-slug-action@v3.x
       - name: Checkout local
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
         with:
           path: ${{ env.GITHUB_REPOSITORY_SLUG_URL }}    
       - name: Checkout
         uses: actions/checkout@v3
       - name: Odoo Enterprise   
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
         with:
           repository: odoo/enterprise
-          # token: ${{ secrets.GITHUB_TOKEN }}
-          token: ${{ secrets.ACTIONS_PAT }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          # token: ${{ secrets.ACTIONS_PAT }}
           path: server/addons_dependencies
           ref: ${{ env.GITHUB_REF_SLUG }}        
 

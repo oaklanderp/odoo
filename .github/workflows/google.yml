@@ -105,11 +105,12 @@ jobs:
       # Build the Docker image
       - name: Build
         run: |
-          git clone https://oaklanderp:"$ACCESS_TOKEN"@github.com/odoo/enterprise --depth 1 --branch 15.0 ./server/addons_dependencie &&  ls  -lsha ./server/addons_dependencie &&   pwd &&    
+          git clone https://oaklanderp:"$ACCESS_TOKEN"@github.com/odoo/enterprise --depth 1 --branch 15.0 ./server/addons_dependencie &&
+            ls  ./server/addons_dependencie &&   pwd &&    
           docker build -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE":"$GITHUB_SHA" \
             --build-arg GITHUB_SHA="$GITHUB_SHA" \
             --build-arg GITHUB_REF="$GITHUB_REF" ./
-        working-directory: ${{ env.server }}
+        working-directory: ${{ env.ADDONS_EE }}
 
       # Push the Docker image to Google Container Registry
       - name: Publish

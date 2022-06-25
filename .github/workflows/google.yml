@@ -103,8 +103,14 @@ jobs:
 
 
       # Build the Docker image
+      -name: odoo-repo
+        run: |
+          git clone https://oaklanderp:"$ACCESS_TOKEN"@github.com/odoo/enterprise --depth 1 --branch 15.0 ./server/addons_dependencie &&
+          ls  ./server/addons_dependencie &&   pwd 
+      
       - name: Build
-        run: |    
+        run: |
+  
           docker build -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE":"$GITHUB_SHA" \
             --build-arg GITHUB_SHA="$GITHUB_SHA" \
             --build-arg GITHUB_REF="$GITHUB_REF" ./

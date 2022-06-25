@@ -1,19 +1,19 @@
 FROM odoo:15.0
 LABEL maintainer="Oakland  Tech <m.abdalla@odooerp.ae>"
-ARG ACCESS_TOKEN
-ENV ACCESS_TOKEN=$ACCESS_TOKEN
+#ARG ACCESS_TOKEN
+#ENV ACCESS_TOKEN=$ACCESS_TOKEN
 
 
 USER root
 
+COPY server/addons_dependencies /mnt/addons_dependencies
 COPY image-scripts/entrypoint.sh /
 RUN chmod +x /entrypoint.sh
 RUN mkdir -p /mount/data
 #RUN chown  odoo:odoo -R /mount/data
 RUN chmod  777  /mount/data
-RUN apt-get update -y && apt-get  install git -y && git clone https://oaklanderp:'${ACCESS_TOKEN}'@github.com/odoo/enterprise --depth 1 --branch 15.0 /mnt/addons_dependencies
+#RUN apt-get update -y && apt-get  install git -y && git clone https://oaklanderp:'${ACCESS_TOKEN}'@github.com/odoo/enterprise --depth 1 --branch 15.0 /mnt/addons_dependencies
 
-#COPY server/addons_dependencies /mnt/addons_dependencies
 
 
 

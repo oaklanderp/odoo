@@ -23,6 +23,7 @@ env:
   GKE_ZONE: ${{ secrets.GKE_ZONE }}
   GKE_GCR:  ${{ secrets.GKE_GCR }}
   GKE_CLUSTER: cluster-1
+  ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
   IMAGE: web-app
   REGISTRY_HOSTNAME: gcr.io
   DEPLOYMENT_NAME: web-app
@@ -60,18 +61,18 @@ jobs:
       #   uses: actions/checkout@v2
       #   with:
       #     path: ${{ env.GITHUB_REPOSITORY_SLUG_URL }}    
-      # - name: Checkout
-      #   uses: actions/checkout@v3
-      - name: Odoo Enterprise   
-        uses: actions/checkout@v2
-        with:
-          #repository: odoo/enterprise.git
-          repository: odoo/enterprise
-      #     # # token: ${{ secrets.GITHUB_TOKEN }}
-      #     # # token: ${{ secrets.ACTIONS_PAT }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-          path: server/addons_dependencies
-          # ref: ${{ env.GITHUB_REF }}        
+      - name: Checkout
+        uses: actions/checkout@v3
+      # - name: Odoo Enterprise   
+      #   uses: actions/checkout@v2
+      #   with:
+      #     #repository: odoo/enterprise.git
+      #     repository: odoo/enterprise
+      # #     # # token: ${{ secrets.GITHUB_TOKEN }}
+      # #     # # token: ${{ secrets.ACTIONS_PAT }}
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     path: ./server/addons_dependencies
+      #     # ref: ${{ env.GITHUB_REF }}        
 
       # Setup gcloud CLI
      # - uses: GoogleCloudPlatform/github-actions/setup-gcloud@v0.6.0
@@ -103,6 +104,9 @@ jobs:
 
       # Build the Docker image
       - name: Build
+        run: |
+           git clone https://oaklanderp:"$ACCESS_TOKEN"@github.com/odoo/enterprise --depth 1 --branch 15.0 ./server/addons_dependencie
+
         run: |
           docker build -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE":"$GITHUB_SHA" \
             --build-arg GITHUB_SHA="$GITHUB_SHA" \

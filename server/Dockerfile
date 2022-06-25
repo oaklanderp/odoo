@@ -1,7 +1,7 @@
 FROM odoo:15.0
 LABEL maintainer="Oakland  Tech <m.abdalla@odooerp.ae>"
 ARG ACCESS_TOKEN
-ENV ACCESS_TOKEN ${ACCESS_TOKEN}
+ENV ACCESS_TOKEN=$ACCESS_TOKEN
 
 
 USER root

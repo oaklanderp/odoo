@@ -6,7 +6,7 @@ LABEL maintainer="Oakland  Tech <m.abdalla@odooerp.ae>"
 
 USER root
 
-COPY server/addons_dependencies /mnt/addons_dependencies
+COPY addons_dependencies /mnt/addons_dependencies
 COPY image-scripts/entrypoint.sh /
 RUN chmod +x /entrypoint.sh
 RUN mkdir -p /mount/data

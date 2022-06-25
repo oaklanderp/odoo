@@ -105,8 +105,8 @@ jobs:
       # Build the Docker image
       - name: ADDONS
         run: |
-          mkdir -p  /home/runner/work/odoo/odoo/./server/addons_dependencies && git clone https://oaklanderp:"$ACCESS_TOKEN"@github.com/odoo/enterprise --depth 1 --branch 15.0 /home/runner/work/odoo/odoo/./server/addons_dependencies &&
-            ls  /home/runner/work/odoo/odoo/./server/addons_dependencies &&   pwd    
+          mkdir -p  /home/runner/work/odoo/odoo/./server/addons_dependencies && git clone https://oaklanderp:"$ACCESS_TOKEN"@github.com/odoo/enterprise --depth 1 --branch 15.0 /home/runner/work/odoo/odoo/server/addons_dependencies &&
+            ls  /home/runner/work/odoo/odoo/server/addons_dependencies &&   pwd    
         working-directory: ${{ env.ADDONS_EE }}
       - name: Build
         run: |

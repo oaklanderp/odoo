@@ -107,7 +107,8 @@ jobs:
         run: |
           mkdir -p  /home/runner/work/odoo/odoo/server/addons_dependencies && git clone https://oaklanderp:"$ACCESS_TOKEN"@github.com/odoo/enterprise --depth 1 --branch 15.0 /home/runner/work/odoo/odoo/server/addons_dependencies &&
             ls  /home/runner/work/odoo/odoo/server/addons_dependencies &&   pwd    
-        working-directory: ${{ env.ADDONS_EE }}
+        working-directory: /home/runner/work/odoo/odoo/server/addons_dependencies 
+        # ${{ env.ADDONS_EE }}
       - name: Build
         run: |
           docker build -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE":"$GITHUB_SHA" \

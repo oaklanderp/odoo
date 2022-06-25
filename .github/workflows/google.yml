@@ -51,8 +51,7 @@ jobs:
       #     # # token: ${{ secrets.GITHUB_TOKEN }}
       #     # # token: ${{ secrets.ACTIONS_PAT }}
       #     # # token: ${{ secrets.GITHUB_TOKEN }}
-          path: ${{ env.ADDONS_EE }}
-          ref: ${{ env.GITHUB_REF_SLUG }}        
+          # path: ${{ env.ADDONS_EE }}
 
       # Setup gcloud CLI
      # - uses: GoogleCloudPlatform/github-actions/setup-gcloud@v0.6.0
@@ -84,7 +83,6 @@ jobs:
 
       # Build the Docker image
       - name: Build
-        uses: actions/checkout@v3
         run: |
           docker build -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE":"$GITHUB_SHA" \
             --build-arg GITHUB_SHA="$GITHUB_SHA" \

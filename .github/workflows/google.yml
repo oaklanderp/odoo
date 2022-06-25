@@ -121,7 +121,7 @@ jobs:
         run: |
           docker push $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE:$GITHUB_SHA
         working-directory: ${{ env.server }}
-F
+
       # Set up kustomize
       - name: Set up Kustomize
         run: |

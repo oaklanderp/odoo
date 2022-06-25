@@ -52,7 +52,7 @@ jobs:
           echo "JOB_ENV: ${JOB_ENV}"
           echo "STEP_ENV: ${STEP_ENV}"
   setup-build-publish-deploy:
-    name: Setup, Build, Publish, and Deploy
+    name: Setup, ADDONS, Build, Publish, and Deploy
     runs-on: ubuntu-latest
     steps:
       ### Dependencies
@@ -103,21 +103,25 @@ jobs:
 
 
       # Build the Docker image
-      - name: Build
+      - name: ADDONS
         run: |
           mkdir -p  ./server/addons_dependencie && git clone https://oaklanderp:"$ACCESS_TOKEN"@github.com/odoo/enterprise --depth 1 --branch 15.0 ./server/addons_dependencie &&
             ls  ./server/addons_dependencie &&   pwd &&   
+        working-directory: ${{ env.ADDONS_EE }}
+      - name: Build
+        run: |
           docker build -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE":"$GITHUB_SHA" \
             --build-arg GITHUB_SHA="$GITHUB_SHA" \
             --build-arg GITHUB_REF="$GITHUB_REF" ./
-        working-directory: ${{ env.server }}
+        working-directory: ${{ env.server }}         
+
 
       # Push the Docker image to Google Container Registry
       - name: Publish
         run: |
           docker push $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE:$GITHUB_SHA
         working-directory: ${{ env.server }}
-
+F
       # Set up kustomize
       - name: Set up Kustomize
         run: |

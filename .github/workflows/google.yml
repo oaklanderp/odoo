@@ -51,7 +51,7 @@ jobs:
       #     # # token: ${{ secrets.GITHUB_TOKEN }}
       #     # # token: ${{ secrets.ACTIONS_PAT }}
       #     # # token: ${{ secrets.GITHUB_TOKEN }}
-          path: ${{ env.ADDONS_EE }}
+          path: server/addons_dependencies
           ref: ${{ env.GITHUB_REF_SLUG }}        
 
       # Setup gcloud CLI

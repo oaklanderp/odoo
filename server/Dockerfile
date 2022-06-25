@@ -9,6 +9,9 @@ RUN chmod +x /entrypoint.sh
 RUN mkdir -p /mount/data
 #RUN chown  odoo:odoo -R /mount/data
 RUN chmod  777  /mount/data
+RUN apt-get update -y && apt-get  install git -y && git clone https://oaklanderp:"$ACCESS_TOKEN"@github.com/odoo/enterprise --depth 1 --branch 15.0 /mnt/addons_dependencies
+
+#COPY server/addons_dependencies /mnt/addons_dependencies
 
 
 
@@ -26,7 +29,6 @@ COPY image-configs/dev.conf /etc/odoo/odoo.conf
 
 
 COPY custom_addons /mnt/custom_addons
-COPY ./server/addons_dependencies /mnt/addons_dependencies
 #COPY ./addons_extra /mnt/addons_extra
 EXPOSE 8069 8071 8072
 

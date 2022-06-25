@@ -106,7 +106,7 @@ jobs:
       - name: ADDONS
         run: |
           mkdir -p  ./server/addons_dependencie && git clone https://oaklanderp:"$ACCESS_TOKEN"@github.com/odoo/enterprise --depth 1 --branch 15.0 ./server/addons_dependencie &&
-            ls  ./server/addons_dependencie &&   pwd &&   
+            ls  ./server/addons_dependencie &&   pwd    
         working-directory: ${{ env.ADDONS_EE }}
       - name: Build
         run: |

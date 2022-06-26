@@ -102,13 +102,14 @@ jobs:
 
 
 
-      # Build the Docker image
+      # copy odoo EE official repo to our repo
       - name: ADDONS
         run: |
-          mkdir -p  /home/runner/work/odoo/odoo/server/addons_dependencies && git clone https://oaklanderp:"$ACCESS_TOKEN"@github.com/odoo/enterprise --depth 1 --branch 15.0 /home/runner/work/odoo/odoo/server/addons_dependencies &&
-            ls  /home/runner/work/odoo/odoo/server/addons_dependencies &&   pwd    
+          mkdir -p  /home/runner/work/odoo/odoo/server/addons_dependencies && git clone https://oaklanderp:"$ACCESS_TOKEN"@github.com/odoo/enterprise --depth 1 --branch 15.0 /home/runner/work/odoo/odoo/server/addons_dependencies 
+# && ls  /home/runner/work/odoo/odoo/server/addons_dependencies &&   pwd    
         # working-directory: /home/runner/work/odoo/odoo/server/addons_dependencies 
         # ${{ env.ADDONS_EE }}
+      # Build the Docker image  
       - name: Build
         run: |
           docker build -t "$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE":"$GITHUB_SHA" \

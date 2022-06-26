@@ -53,34 +53,34 @@ spec:
         - name: my-pvc
           persistentVolumeClaim:
             claimName: nfs     
----                      
-apiVersion: autoscaling/v2beta2
-kind: HorizontalPodAutoscaler
-metadata:
-  name: web-app
-  namespace: GH_USERNAME
-spec:
-  scaleTargetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: web-app
-  minReplicas: 2
-  maxReplicas: 8
-#in  prodction   maxReplicas: 12  should  beacuse on my case the quota is limited.                       
+# ---                      
+# apiVersion: autoscaling/v2beta2
+# kind: HorizontalPodAutoscaler
+# metadata:
+#   name: web-app
+#   namespace: GH_USERNAME
+# spec:
+#   scaleTargetRef:
+#     apiVersion: apps/v1
+#     kind: Deployment
+#     name: web-app
+#   minReplicas: 2
+#   maxReplicas: 8
+# #in  prodction   maxReplicas: 12  should  beacuse on my case the quota is limited.                       
 
-  metrics:
-  - type: Resource
-    resource:
-      name: cpu
-      target:
-        type: Utilization
-        averageUtilization: 30
-  - type: Resource
-    resource:
-      name: memory
-      target:
-        type: AverageValue
-        averageValue: 150Mi
+#   metrics:
+#   - type: Resource
+#     resource:
+#       name: cpu
+#       target:
+#         type: Utilization
+#         averageUtilization: 30
+#   - type: Resource
+#     resource:
+#       name: memory
+#       target:
+#         type: AverageValue
+#         averageValue: 150Mi
 
 
 

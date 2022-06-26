@@ -2,7 +2,7 @@ kind: StorageClass
 apiVersion: storage.k8s.io/v1
 metadata:
   name: regionalpd-storageclass
-  namespace: GH_USERNAME  
+  namespace: oaklanderp  
 provisioner: kubernetes.io/gce-pd
 parameters:
   type:  pd-standard

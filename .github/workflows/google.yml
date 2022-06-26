@@ -11,10 +11,14 @@
 name: Build and Deploy to GKE
 
 on:
-  #pull_request:
-  push:
-    branches:
-      - 15.0
+  pull_request:
+    types:
+      - opened  
+    
+
+  # push:
+  #   branches:
+  #     - 15.0
 # Environment variables available to all jobs and steps in this workflow ${GH_USERNAME}
 env:
   GKE_PROJECT: ${{ secrets.GKE_PROJECT }}
@@ -47,7 +51,7 @@ jobs:
           echo "GITHUB_WORKSPACE: ${GITHUB_WORKSPACE}"
           echo "GITHUB_SHA: ${GITHUB_SHA}"
           echo "GITHUB_REF: ${GITHUB_REF}"
-          echo "GITHUB_REF:${GH_USERNAME}"
+          echo "GITHUB_USERNAME:${GH_USERNAME}"
           echo "GITHUB_REF_SLUG: ${GITHUB_REF_SLUG}"          
           echo "WF_ENV: ${WF_ENV}"
           echo "JOB_ENV: ${JOB_ENV}"

@@ -119,6 +119,7 @@ jobs:
           sed -i -e 's/GH_USERNAME/'"${GITHUB_ACTOR}"'/' ./dev_env/namespace.yaml
           sed -i -e 's/GH_USERNAME/'"${GITHUB_ACTOR}"'/' ./dev_env/postgres-pv.yaml
           sed -i -e 's/GH_USERNAME/'"${GITHUB_ACTOR}"'/' ./dev_env/postgres-configmap.yaml
+          sed -i -e 's/GH_USERNAME/'"${GITHUB_ACTOR}"'/' ./dev_env/postgres-secret.yaml          
           sed -i -e 's/GH_USERNAME/'"${GITHUB_ACTOR}"'/' ./dev_env/postgres-service.yaml  
           sed -i -e 's/GH_USERNAME/'"${GITHUB_ACTOR}"'/' ./dev_env/postgres-deployment.yaml
           sed -i -e 's/GH_USERNAME/'"${GITHUB_ACTOR}"'/' ./dev_env/service.yaml

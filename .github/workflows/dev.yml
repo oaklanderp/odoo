@@ -123,8 +123,8 @@ jobs:
           sed -i -e 's/GH_USERNAME/'"${GITHUB_ACTOR}"'/' ./dev_env/service.yaml
           sed -i -e 's/GKE_GCR/'"$GKE_GCR"'/' ./dev_env/deployment.yaml
           ./kustomize build ./dev_env | kubectl apply -f -
-          kubectl rollout status deployment/$DEPLOYMENT_NAME -n GH_USERNAME
-          kubectl get services -o wide -n GH_USERNAME
-          kubectl get ingress  -o wide -n GH_USERNAME
+          kubectl rollout status deployment/$DEPLOYMENT_NAME -n oaklanderp
+          kubectl get services -o wide -n oaklanderp
+          kubectl get ingress  -o wide -n oaklanderp
         working-directory: ${{ env.server }}
 

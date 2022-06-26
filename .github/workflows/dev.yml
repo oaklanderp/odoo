@@ -35,61 +35,24 @@ jobs:
   setup-build-publish-deploy:
     name: Setup, ADDONS, Build, Publish, and Deploy
     runs-on: ubuntu-latest
-    steps:
-      ### Dependencies
-      # - uses: rlespinasse/github-slug-action@v3.x
-      # - name: Checkout local
-      #   uses: actions/checkout@v2
-      #   with:
-      #     path: ${{ env.GITHUB_REPOSITORY_SLUG_URL }}    
+    steps: 
       - name: Checkout
         uses: actions/checkout@v3
-      # - name: Odoo Enterprise   
-      #   uses: actions/checkout@v2
-      #   with:
-      #     #repository: odoo/enterprise.git
-      #     repository: odoo/enterprise
-      # #     # # token: ${{ secrets.GITHUB_TOKEN }}
-      # #     # # token: ${{ secrets.ACTIONS_PAT }}
-      #     token: ${{ secrets.GITHUB_TOKEN }}
-      #     path: ./server/addons_dependencies
-      #     # ref: ${{ env.GITHUB_REF }}        
-
-    #   Setup gcloud CLI
-    #  - uses: GoogleCloudPlatform/github-actions/setup-gcloud@v0.6.0
-    #   -  uses: mattes/gce-cloudsql-proxy-action@v1
-    #     with:
-    #      creds: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
-    #      instance: light-quest-349811:europe-west1:odoo-db     
+   
       - uses: google-github-actions/setup-gcloud@v0
         with:
           version: "270.0.0"
           service_account_email: ${{ secrets.GKE_EMAIL }}
           service_account_key: ${{ secrets.GKE_KEY }}
-    # Configure Workload Identity Federation and generate an access token.
-    #   - id: 'auth'
-    #    name: 'Authenticate to Google Cloud'
-    #     uses: 'google-github-actions/auth@v0'
-    #     with:
-    #      token_format: 'access_token'
-    #       workload_identity_provider: 'projects/123456789/locations/global/workloadIdentityPools/my-pool/providers/my-provider'
-    #       service_account: 'my-service-account@my-project.iam.gserviceaccount.com'         
 
-      # Configure docker to use the gcloud command-line tool as a credential helper
       - run: |
           # Set up docker to authenticate
           # via gcloud command-line tool.
           gcloud auth configure-docker
-
-
-
       # copy odoo EE official repo to our repo
       - name: ADDONS
         run: |
           mkdir -p  /home/runner/work/odoo/odoo/server/addons_dependencies && git clone https://oaklanderp:"$ACCESS_TOKEN"@github.com/odoo/enterprise --depth 1 --branch 15.0 /home/runner/work/odoo/odoo/server/addons_dependencies 
-# && ls  /home/runner/work/odoo/odoo/server/addons_dependencies &&   pwd    
-        # working-directory: /home/runner/work/odoo/odoo/server/addons_dependencies 
-        # ${{ env.ADDONS_EE }}
       # Build the Docker image  
       - name: Build
         run: |

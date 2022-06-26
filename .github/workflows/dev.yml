@@ -11,10 +11,10 @@
 name: Build and Deploy to GKE
 
 on:
-  pull_request:
-  # push:
-  #   branches:
-  #     - GH_USERNAME
+  # pull_request:
+  push:
+    branches:
+      -${{ GITHUB_ACTOR }}
 # Environment variables available to all jobs and steps in this workflow ${GH_USERNAME}
 env:
   GKE_PROJECT: ${{ secrets.GKE_PROJECT }}
@@ -116,14 +116,14 @@ jobs:
       - name: Deploy
         run: |
           gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GKE_PROJECT
-          sed -i -e 's/REGISTRY_HOSTNAME/'"$REGISTRY_HOSTNAME"'/' ./gke_deploy/deployment.yaml
-          sed -i -e 's/IMAGE/'"$IMAGE"'/' ./gke_deploy/deployment.yaml
-          sed -i -e 's/GITHUB_SHA/'"$GITHUB_SHA"'/' ./gke_deploy/deployment.yaml
-          sed -i -e 's/GH_USERNAME/'"${GITHUB_ACTOR}"'/' ./gke_deploy/service.yaml
-          sed -i -e 's/GKE_GCR/'"$GKE_GCR"'/' ./gke_deploy/deployment.yaml
-          ./kustomize build ./gke_deploy | kubectl apply -f -
-          kubectl rollout status deployment/$DEPLOYMENT_NAME -n prod
-          kubectl get services -o wide -n prod
-          kubectl get ingress  -o wide -n prod
+          sed -i -e 's/REGISTRY_HOSTNAME/'"$REGISTRY_HOSTNAME"'/' ./dev_env/deployment.yaml
+          sed -i -e 's/IMAGE/'"$IMAGE"'/' ./dev_env/deployment.yaml
+          sed -i -e 's/GITHUB_SHA/'"$GITHUB_SHA"'/' ./dev_env/deployment.yaml
+          sed -i -e 's/GH_USERNAME/'"${GITHUB_ACTOR}"'/' ./dev_env/service.yaml
+          sed -i -e 's/GKE_GCR/'"$GKE_GCR"'/' ./dev_env/deployment.yaml
+          ./kustomize build ./dev_env | kubectl apply -f -
+          kubectl rollout status deployment/$DEPLOYMENT_NAME -n GH_USERNAME
+          kubectl get services -o wide -n GH_USERNAME
+          kubectl get ingress  -o wide -n GH_USERNAME
         working-directory: ${{ env.server }}
 

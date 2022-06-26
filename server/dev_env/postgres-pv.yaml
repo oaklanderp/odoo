@@ -5,14 +5,14 @@ metadata:
   namespace: GH_USERNAME  
 provisioner: kubernetes.io/gce-pd
 parameters:
-  type: pd-ssd
+  type:  pd-standard
   replication-type: regional-pd
 allowedTopologies:
   - matchLabelExpressions:
       - key: failure-domain.beta.kubernetes.io/zone
         values:
           - europe-west1-b
-          - europe-west1-c
+
            
          
 ---
@@ -27,4 +27,4 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 100Gi
+      storage: 25GI

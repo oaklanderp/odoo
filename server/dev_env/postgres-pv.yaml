@@ -22,7 +22,7 @@ metadata:
   name: postgresql-pv
   namespace: oaklanderp  
 spec:
-  storageClassName: regionalpd-storageclass-now
+  storageClassName: regionalpd-storageclass
   accessModes:
     - ReadWriteOnce
   resources:

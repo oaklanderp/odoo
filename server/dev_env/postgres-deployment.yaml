@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
  name: postgres
- namespace: prod
+ namespace: GH_USERNAME
 spec:
  strategy:
    rollingUpdate:
@@ -24,11 +24,11 @@ spec:
          args: ["-c", "max_connections=1000"]  
          resources:
            limits:
-             cpu: "2"
-             memory: "12Gi"
+             cpu: ".5"
+             memory: "500MI"
            requests:
-             cpu: "2"
-             memory: "12Gi"
+             cpu: ".5"
+             memory: "500MI"
          ports:
            - containerPort: 5432
          env:

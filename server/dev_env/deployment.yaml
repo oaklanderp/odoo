@@ -1,8 +1,13 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: GH_USERNAME
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: web-app
-  namespace: prod
+  namespace: GH_USERNAME
   labels:
     app: web-app
 spec:
@@ -10,12 +15,12 @@ spec:
   selector:
     matchLabels:
       app: web-app
-      namespace: prod
+      namespace: GH_USERNAME
   template:
     metadata:
       labels:
         app: web-app
-        namespace: prod
+        namespace: GH_USERNAME
     spec:
       containers:
         - name: web-app
@@ -54,16 +59,11 @@ spec:
           persistentVolumeClaim:
             claimName: nfs     
 ---                      
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: <insert-namespace-name-here>         
----
 apiVersion: autoscaling/v2beta2
 kind: HorizontalPodAutoscaler
 metadata:
   name: web-app
-  namespace: prod
+  namespace: GH_USERNAME
 spec:
   scaleTargetRef:
     apiVersion: apps/v1

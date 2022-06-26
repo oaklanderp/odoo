@@ -27,7 +27,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 
+      storage: 100Gi
       
 
 # error validating "STDIN": error validating data: unknown object type "nil" in PersistentVolumeClaim.spec.resources.requests.storage; if you choose to ignore these errors, turn validation off with --validate=false

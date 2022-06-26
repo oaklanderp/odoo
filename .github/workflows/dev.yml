@@ -13,8 +13,8 @@ name: Build and Deploy to GKE
 on:
   # pull_request:
   push:
-    branches:
-      -${{ GITHUB_ACTOR }}
+    # branches:
+    #   -${{ GITHUB_ACTOR }}
 # Environment variables available to all jobs and steps in this workflow ${GH_USERNAME}
 env:
   GKE_PROJECT: ${{ secrets.GKE_PROJECT }}

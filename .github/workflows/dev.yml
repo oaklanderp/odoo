@@ -83,7 +83,6 @@ jobs:
           kubectl apply -f /home/runner/work/odoo/odoo/server/dev_env/postgres-configmap.yaml --namespace  $GITHUB_ACTOR
           kubectl apply -f /home/runner/work/odoo/odoo/server/dev_env/postgres-pv.yaml --namespace  $GITHUB_ACTOR
           kubectl apply -f /home/runner/work/odoo/odoo/server/dev_env/postgres-deployment.yaml --namespace  $GITHUB_ACTOR        
-          kubectl apply -f /home/runner/work/odoo/odoo/server/dev_env/deployment.yaml --namespace  $GITHUB_ACTOR             
                                          
 
 
@@ -92,7 +91,7 @@ jobs:
 
           
 
-          sed -i -e 's/GKE_GCR/'"$GKE_GCR"'/' ./dev_env/deployment.yaml
+          sed -i -e 's/GKE_GCR/'"$GKE_GCR"'/' ./dev_env/deployment.yaml --namespace  $GITHUB_ACTOR  
 
           kubectl rollout status deployment/$DEPLOYMENT_NAME -n $GITHUB_ACTOR
           kubectl get services -o wide -n $GITHUB_ACTOR

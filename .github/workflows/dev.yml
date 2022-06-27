@@ -79,10 +79,8 @@ jobs:
         run: |
           gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GKE_PROJECT
           sed -i -e 's/GH_USERNAME/'"${GITHUB_ACTOR}"'/' ./dev_env/namespace.yaml
-          sed -i -e 's/GH_USERNAME/'"${GITHUB_ACTOR}"'/' ./dev_env/service.yaml
                                          
-          sed -i -e 's/IMAGE/'"$IMAGE"'/' ./dev_env/deployment.yaml
-          sed -i -e 's/GITHUB_SHA/'"$GITHUB_SHA"'/' ./dev_env/deployment.yaml
+
 
 
 
@@ -90,7 +88,6 @@ jobs:
           
 
           sed -i -e 's/GKE_GCR/'"$GKE_GCR"'/' ./dev_env/deployment.yaml
-          ./kustomize build ./dev_env | kubectl apply -f -
           kubectl apply -f /home/runner/work/odoo/odoo/server/dev_env/postgres-secret.yaml -n $GITHUB_ACTOR
           kubectl apply -f /home/runner/work/odoo/odoo/server/dev_env/postgres-configmap.yaml -n $GITHUB_ACTOR
           kubectl apply -f /home/runner/work/odoo/odoo/server/dev_env/postgres-pv.yaml -n $GITHUB_ACTOR

@@ -25,7 +25,7 @@ spec:
             - containerPort: 8069
           resources:
             limits:
-              cpu:200m           
+              cpu: 200m 
             requests:
               cpu: 100m                                        
 #when  go to prodction  must use limits cpu: 1   requests: cpu: 0.5 beacuse on my case the quota is limited.#       #

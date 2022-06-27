@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: web-app
-  namespace: GH_USERNAME
+  namespace: mohamedab2010
   labels:
     app: web-app
 spec:
@@ -10,12 +10,12 @@ spec:
   selector:
     matchLabels:
       app: web-app
-      namespace: GH_USERNAME
+      namespace: mohamedab2010
   template:
     metadata:
       labels:
         app: web-app
-        namespace: GH_USERNAME
+        namespace: mohamedab2010
     spec:
       containers:
         - name: web-app
@@ -25,7 +25,7 @@ spec:
             - containerPort: 8069
           resources:
             limits:
-              cpu: 200m           
+              cpu:200m           
             requests:
               cpu: 100m                                        
 #when  go to prodction  must use limits cpu: 1   requests: cpu: 0.5 beacuse on my case the quota is limited.#       #
@@ -53,34 +53,6 @@ spec:
       #   - name: my-pvc
       #     persistentVolumeClaim:
       #       claimName: nfs     
-# ---                      
-# apiVersion: autoscaling/v2beta2
-# kind: HorizontalPodAutoscaler
-# metadata:
-#   name: web-app
-#   namespace: GH_USERNAME
-# spec:
-#   scaleTargetRef:
-#     apiVersion: apps/v1
-#     kind: Deployment
-#     name: web-app
-#   minReplicas: 2
-#   maxReplicas: 8
-# #in  prodction   maxReplicas: 12  should  beacuse on my case the quota is limited.                       
-
-#   metrics:
-#   - type: Resource
-#     resource:
-#       name: cpu
-#       target:
-#         type: Utilization
-#         averageUtilization: 30
-#   - type: Resource
-#     resource:
-#       name: memory
-#       target:
-#         type: AverageValue
-#         averageValue: 150Mi
 
 
 

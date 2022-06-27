@@ -25,19 +25,19 @@ spec:
          resources:
            limits:
              cpu: "1"
-             memory: "500MI"
+             memory: "500Mi"
            requests:
              cpu: "1"
-             memory: "500MI"
+             memory: "500Mi"
          ports:
            - containerPort: 5432
          env:
-           - name: global.postgresql.postgresqlUsername		
+           - name: POSTGRES_USER		
              valueFrom:
                secretKeyRef:
                  name: postgres-secret
                  key: POSTGRES_USER
-           - name: global.postgresql.postgresqlPassword	
+           - name: POSTGRES_PASSWORD	
              valueFrom:
                secretKeyRef:
                  name: postgres-secret

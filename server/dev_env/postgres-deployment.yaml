@@ -24,10 +24,10 @@ spec:
          args: ["-c", "max_connections=1000"]  
          resources:
            limits:
-             cpu: ".5"
+             cpu: "1"
              memory: "500MI"
            requests:
-             cpu: ".5"
+             cpu: "1"
              memory: "500MI"
          ports:
            - containerPort: 5432

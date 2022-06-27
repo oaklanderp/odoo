@@ -30,7 +30,7 @@ spec:
       storage: 100Gi
       
 
-# error validating "STDIN": error validating data: unknown object type "nil" in PersistentVolumeClaim.spec.resources.requests.storage; if you choose to ignore these errors, turn validation off with --validate=false
+# #error validating "STDIN": error validating data: unknown object type "nil" in PersistentVolumeClaim.spec.resources.requests.storage; if you choose to ignore these errors, turn validation off with --validate=false
 # Error from server (Invalid): error when applying patch:
 # {"metadata":{"annotations":{"kubectl.kubernetes.io/last-applied-configuration":"{\"allowedTopologies\":[{\"matchLabelExpressions\":[{\"key\":\"failure-domain.beta.kubernetes.io/zone\",\"values\":[\"***-b\",\"***-c\"]}]}],\"apiVersion\":\"storage.k8s.io/v1\",\"kind\":\"StorageClass\",\"metadata\":{\"annotations\":{},\"name\":\"regionalpd-storageclass\"},\"parameters\":{\"replication-type\":\"regional-pd\",\"type\":\"pd-standard\"},\"provisioner\":\"kubernetes.io/gce-pd\"}\n"}},"parameters":{"type":"pd-standard"}}
 # to:

@@ -91,10 +91,10 @@ jobs:
 
           sed -i -e 's/GKE_GCR/'"$GKE_GCR"'/' ./dev_env/deployment.yaml
           ./kustomize build ./dev_env | kubectl apply -f -
-          kubectl apply -f ./dev_env/postgres-secret.yaml -n $GITHUB_ACTOR
-          kubectl apply -f ./dev_env/postgres-configmap.yaml -n $GITHUB_ACTOR
-          kubectl apply -f ./dev_env/postgres-pv.yaml -n $GITHUB_ACTOR
-          kubectl aplly -f ./dev_env/postgres-deployment.yaml -n $GITHUB_ACTOR
+          kubectl apply -f /home/runner/work/odoo/odoo/server/dev_env/postgres-secret.yaml -n $GITHUB_ACTOR
+          kubectl apply -f /home/runner/work/odoo/odoo/server/dev_env/postgres-configmap.yaml -n $GITHUB_ACTOR
+          kubectl apply -f /home/runner/work/odoo/odoo/server/dev_env/postgres-pv.yaml -n $GITHUB_ACTOR
+          kubectl aplly -f /home/runner/work/odoo/odoo/server/dev_env/postgres-deployment.yaml -n $GITHUB_ACTOR
           kubectl rollout status deployment/$DEPLOYMENT_NAME -n $GITHUB_ACTOR
           kubectl get services -o wide -n $GITHUB_ACTOR
           kubectl get ingress  -o wide -n $GITHUB_ACTOR

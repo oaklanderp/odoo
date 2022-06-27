@@ -79,11 +79,14 @@ jobs:
         run: |
           gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GKE_PROJECT
           sed -i -e 's/GH_USERNAME/'"${GITHUB_ACTOR}"'/' ./dev_env/namespace.yaml
-          sed -i -e 's/GH_USERNAME/'"${GITHUB_ACTOR}"'/' ./dev_env/postgres-pv.yaml 
+          sed -i -e 's/GH_USERNAME/'"${GITHUB_ACTOR}"'/' ./dev_env/postgres-pv.yaml
+          sed -i -e 's/GH_USERNAME/'"${GITHUB_ACTOR}"'/' ./dev_env/postgres-secret.yaml
+          sed -i -e 's/GH_USERNAME/'"${GITHUB_ACTOR}"'/' ./dev_env/postgres-configmap.yaml
+          sed -i -e 's/REGISTRY_HOSTNAME/'"$REGISTRY_HOSTNAME"'/' ./dev_env/deployment.yaml 
 
           
           sed -i -e 's/GH_USERNAME/'"${GITHUB_ACTOR}"'/' ./dev_env/service.yaml
-          sed -i -e 's/REGISTRY_HOSTNAME/'"$REGISTRY_HOSTNAME"'/' ./dev_env/deployment.yaml                               
+                                         
           sed -i -e 's/IMAGE/'"$IMAGE"'/' ./dev_env/deployment.yaml
           sed -i -e 's/GITHUB_SHA/'"$GITHUB_SHA"'/' ./dev_env/deployment.yaml
 

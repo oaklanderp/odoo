@@ -1,11 +1,11 @@
 kind: StorageClass
 apiVersion: storage.k8s.io/v1
 metadata:
-  name: regionalpd-storageclass
-  namespace: oaklanderp  
+  name: regionalpd-storageclass-github
+  namespace:  oaklanderp
 provisioner: kubernetes.io/gce-pd
 parameters:
-  type:  pd-standard
+  type: pd-ssd
   replication-type: regional-pd
 allowedTopologies:
   - matchLabelExpressions:
@@ -22,21 +22,9 @@ metadata:
   name: postgresql-pv
   namespace: oaklanderp  
 spec:
-  storageClassName: regionalpd-storageclass
+  storageClassName: regionalpd-storageclass-github
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 100Gi
-      
-
-# #error validating "STDIN": error validating data: unknown object type "nil" in PersistentVolumeClaim.spec.resources.requests.storage; if you choose to ignore these errors, turn validation off with --validate=false
-# Error from server (Invalid): error when applying patch:
-# {"metadata":{"annotations":{"kubectl.kubernetes.io/last-applied-configuration":"{\"allowedTopologies\":[{\"matchLabelExpressions\":[{\"key\":\"failure-domain.beta.kubernetes.io/zone\",\"values\":[\"***-b\",\"***-c\"]}]}],\"apiVersion\":\"storage.k8s.io/v1\",\"kind\":\"StorageClass\",\"metadata\":{\"annotations\":{},\"name\":\"regionalpd-storageclass\"},\"parameters\":{\"replication-type\":\"regional-pd\",\"type\":\"pd-standard\"},\"provisioner\":\"kubernetes.io/gce-pd\"}\n"}},"parameters":{"type":"pd-standard"}}
-# to:
-# Resource: "storage.k8s.io/v1, Resource=storageclasses", GroupVersionKind: "storage.k8s.io/v1, Kind=StorageClass"
-# Name: "regionalpd-storageclass", Namespace: ""
-# for: "STDIN": StorageClass.storage.k8s.io "regionalpd-storageclass" is invalid: parameters: Forbidden: updates to parameters are forbidden.
-# Error from server (NotFound): error when creating "STDIN": namespaces "GH_USERNAME" not found
-# Error from server (BadRequest): error when creating "STDIN": Deployment in version "v1" cannot be handled as a Deployment: v1.Deployment.Spec: v1.DeploymentSpec.Template: v1.PodTemplateSpec.Spec: v1.PodSpec.Containers: []v1.Container: v1.Container.Resources: v1.ResourceRequirements.Requests: Limits: unmarshalerDecoder: quantities must match the regular expression '^([+-]?[0-9.]+)([eEinumkKMGTP]*[-+]?[0-9]*)$', error found in #10 byte of ...|y":"500MI"},"request|..., bigger context ...|"resources":{"limits":{"cpu":".5","memory":"500MI"},"requests":{"cpu":".5","memory":"500MI"}},"volum|...
-# Error from server (BadRequest): error when creating "STDIN": admission webhook "validate.nginx.ingress.kubernetes.io" denied the request: host "oaklanderp.stage.inharf.xyz" and path "/" is already defined in ingress prod/odoo-ingress-actions     
+      storage: 15Gi

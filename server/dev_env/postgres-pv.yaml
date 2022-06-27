@@ -20,7 +20,7 @@ kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: postgresql-pv
-    #namespace: oaklanderp  
+   # #namespace: oaklanderp  
 spec:
   storageClassName: regionalpd-storageclass-github1
   accessModes:

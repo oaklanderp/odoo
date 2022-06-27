@@ -75,21 +75,16 @@ jobs:
           chmod u+x ./kustomize
         working-directory: ${{ env.server }}
 
-      ### Deploy the Docker image to the GKE cluster 
       - name: Deploy
         run: |
           gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GKE_PROJECT
           sed -i -e 's/GH_USERNAME/'"${GITHUB_ACTOR}"'/' ./dev_env/namespace.yaml
-          sed -i -e 's/GH_USERNAME/'"${GITHUB_ACTOR}"'/' ./dev_env/postgres-pv.yaml          
-          sed -i -e 's/GH_USERNAME/'"${GITHUB_ACTOR}"'/' ./dev_env/postgres-configmap.yaml
-          sed -i -e 's/GH_USERNAME/'"${GITHUB_ACTOR}"'/' ./dev_env/postgres-secret.yaml          
-          sed -i -e 's/GH_USERNAME/'"${GITHUB_ACTOR}"'/' ./dev_env/postgres-service.yaml  
-          sed -i -e 's/GH_USERNAME/'"${GITHUB_ACTOR}"'/' ./dev_env/postgres-deployment.yaml
-          
-          sed -i -e 's/GH_USERNAME/'"${GITHUB_ACTOR}"'/' ./dev_env/service.yaml
-          sed -i -e 's/REGISTRY_HOSTNAME/'"$REGISTRY_HOSTNAME"'/' ./dev_env/deployment.yaml                               
-          sed -i -e 's/IMAGE/'"$IMAGE"'/' ./dev_env/deployment.yaml
-          sed -i -e 's/GITHUB_SHA/'"$GITHUB_SHA"'/' ./dev_env/deployment.yaml
+          kubectl apply -f /home/runner/work/odoo/odoo/server/dev_env/postgres-secret.yaml --namespace  $GITHUB_ACTOR
+          kubectl apply -f /home/runner/work/odoo/odoo/server/dev_env/postgres-configmap.yaml --namespace  $GITHUB_ACTOR
+          kubectl apply -f /home/runner/work/odoo/odoo/server/dev_env/postgres-pv.yaml --namespace  $GITHUB_ACTOR
+          kubectl aplly -f /home/runner/work/odoo/odoo/server/dev_env/postgres-deployment.yaml --namespace  $GITHUB_ACTOR          
+                                         
+
 
 
 
@@ -97,9 +92,9 @@ jobs:
           
 
           sed -i -e 's/GKE_GCR/'"$GKE_GCR"'/' ./dev_env/deployment.yaml
-          ./kustomize build ./dev_env | kubectl apply -f -
-          kubectl rollout status deployment/$DEPLOYMENT_NAME -n oaklanderp
-          kubectl get services -o wide -n oaklanderp
-          kubectl get ingress  -o wide -n oaklanderp
+
+          kubectl rollout status deployment/$DEPLOYMENT_NAME -n $GITHUB_ACTOR
+          kubectl get services -o wide -n $GITHUB_ACTOR
+          kubectl get ingress  -o wide -n $GITHUB_ACTOR
         working-directory: ${{ env.server }}
 

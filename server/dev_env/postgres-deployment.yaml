@@ -24,20 +24,20 @@ spec:
          args: ["-c", "max_connections=1000"]  
          resources:
            limits:
-             cpu: ".5"
-             memory: "500MI"
+             cpu: "1"
+             memory: "500Mi"
            requests:
-             cpu: ".5"
-             memory: "500MI"
+             cpu: "1"
+             memory: "500Mi"
          ports:
            - containerPort: 5432
          env:
-           - name: global.postgresql.postgresqlUsername		
+           - name: POSTGRES_USER		
              valueFrom:
                secretKeyRef:
                  name: postgres-secret
                  key: POSTGRES_USER
-           - name: global.postgresql.postgresqlPassword	
+           - name: POSTGRES_PASSWORD	
              valueFrom:
                secretKeyRef:
                  name: postgres-secret

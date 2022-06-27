@@ -2,7 +2,7 @@ kind: StorageClass
 apiVersion: storage.k8s.io/v1
 metadata:
   name: regionalpd-storageclass-github
-  namespace:  oaklanderp
+  namespace:  mohamedab2010
 provisioner: kubernetes.io/gce-pd
 parameters:
   type: pd-ssd
@@ -20,7 +20,7 @@ kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: postgresql-pv
-  namespace: oaklanderp  
+  namespace: mohamedab2010  
 spec:
   storageClassName: regionalpd-storageclass-github
   accessModes:

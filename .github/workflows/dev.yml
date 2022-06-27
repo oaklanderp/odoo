@@ -91,7 +91,8 @@ jobs:
 
           
 
-          sed -i  's/GKE_GCR/'"$GKE_GCR"'/'  && sed -i -e 's/GH_USERNAME/'"${GITHUB_ACTOR}"'/' ./dev_env/deployment.yaml 
+          sed -i  's/GKE_GCR/'"$GKE_GCR"'/'  
+          sed -i -e 's/GH_USERNAME/'"${GITHUB_ACTOR}"'/' ./dev_env/deployment.yaml 
 
           kubectl rollout status deployment/$DEPLOYMENT_NAME -n $GITHUB_ACTOR
           kubectl get services -o wide -n $GITHUB_ACTOR

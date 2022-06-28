@@ -19,7 +19,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: odoo-ingress-actions
-  ##namespace: GH_USERNAME
+  ###namespace: GH_USERNAME
   annotations:
     kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/limit-connections: '10'

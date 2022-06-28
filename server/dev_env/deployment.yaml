@@ -15,7 +15,7 @@ spec:
     metadata:
       labels:
         app: web-app
-        #: GH_USERNAME
+        # #: GH_USERNAME
     spec:
       containers:
         - name: web-app

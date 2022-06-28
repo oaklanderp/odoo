@@ -79,15 +79,19 @@ jobs:
         run: |
           gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GKE_PROJECT
           sed -i -e 's/GH_USERNAME/'"${GITHUB_ACTOR}"'/' ./dev_env/namespace.yaml
-          kubectl apply -f /home/runner/work/odoo/odoo/server/dev_env/postgres-secret.yaml --namespace  $GITHUB_ACTOR
-          kubectl apply -f /home/runner/work/odoo/odoo/server/dev_env/postgres-configmap.yaml --namespace  $GITHUB_ACTOR
-          kubectl apply -f /home/runner/work/odoo/odoo/server/dev_env/postgres-pv.yaml --namespace  $GITHUB_ACTOR
-          kubectl apply -f /home/runner/work/odoo/odoo/server/dev_env/postgres-deployment.yaml --namespace  $GITHUB_ACTOR  
           sed -i   's/GKE_GCR/'"$GKE_GCR"'/' ./dev_env/deployment.yaml
           sed -i -e 's/REGISTRY_HOSTNAME/'"$REGISTRY_HOSTNAME"'/' ./dev_env/deployment.yaml
           sed -i -e 's/IMAGE/'"$IMAGE"'/' ./dev_env/deployment.yaml
           sed -i -e 's/GITHUB_SHA/'"$GITHUB_SHA"'/' ./dev_env/deployment.yaml
           sed -i -e 's/GH_USERNAME/'"${GITHUB_ACTOR}"'/' ./dev_env/service.yaml
+          sed -i -e 's/GH_USERNAME/'"${GITHUB_ACTOR}"'/' ./dev_env/postgres-pv.yaml
+          kubectl apply -f /home/runner/work/odoo/odoo/server/dev_env/service.yaml 
+
+          kubectl apply -f /home/runner/work/odoo/odoo/server/dev_env/postgres-secret.yaml --namespace  $GITHUB_ACTOR
+          kubectl apply -f /home/runner/work/odoo/odoo/server/dev_env/postgres-configmap.yaml --namespace  $GITHUB_ACTOR
+          kubectl apply -f /home/runner/work/odoo/odoo/server/dev_env/postgres-pv.yaml --namespace  $GITHUB_ACTOR
+          kubectl apply -f /home/runner/work/odoo/odoo/server/dev_env/postgres-deployment.yaml --namespace  $GITHUB_ACTOR  
+
           kubectl apply -f /home/runner/work/odoo/odoo/server/dev_env/deployment.yaml --namespace  $GITHUB_ACTOR
           kubectl apply -f /home/runner/work/odoo/odoo/server/dev_env/service.yaml --namespace  $GITHUB_ACTOR
                                          

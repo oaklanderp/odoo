@@ -11,6 +11,8 @@
   # sed -i -e 's/IMAGE/'"$IMAGE"'/' ./dev_env/deployment.yaml
   # sed -i -e 's/GITHUB_SHA/'"$GITHUB_SHA"'/' ./dev_env/deployment.yaml
   # ./kustomize build ./dev_env | kubectl apply -f -
+  # sed -i  -e 's/GKE_GCR/'"$GKE_GCR"'/';s/GH_USERNAME/'"${GITHUB_ACTOR}"'/g' ./dev_env/deployment.yaml 
+
 
 
   

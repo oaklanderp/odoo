@@ -22,9 +22,6 @@ spec:
        - name: postgres
          image: postgres:14
          args: ["-c", "max_connections=1000"]  
-         args: ["-c", "create user odoo"]
-         args: ["-c", "ALTER USER odoo  PASSWORD '123@abc@mohamed'"]
-
          resources:
            limits:
              cpu: "1"

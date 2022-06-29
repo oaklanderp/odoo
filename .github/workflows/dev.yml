@@ -84,8 +84,8 @@ jobs:
           sed -i -e 's/IMAGE/'"$IMAGE"'/' ./dev_env/deployment.yaml
           sed -i -e 's/GITHUB_SHA/'"$GITHUB_SHA"'/' ./dev_env/deployment.yaml
 
-          sed -i -e 's/GH_USERNAME/'"${GITHUB_ACTOR}"'/' ./dev_env/service.yaml
-          sed -i -e 's/GH_USERNAME/'"${GITHUB_ACTOR}"'/g' ./dev_env/ingress.yaml
+          sed -i -e 's/GH_USERNAME/'"${GITHUB_ACTOR}"'/' ./dev_env/web-app-service.yaml
+          sed -i -e 's/GH_USERNAME/'"${GITHUB_ACTOR}"'/g' ./dev_env/web-app-ingress.yaml
 
           sed -i -e 's/GH_USERNAME/'"${GITHUB_ACTOR}"'/' ./dev_env/postgres-pv.yaml
           kubectl apply -f /home/runner/work/odoo/odoo/server/dev_env/namespace.yaml 

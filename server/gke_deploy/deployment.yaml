@@ -48,7 +48,7 @@ spec:
                  key: database_url                      
           volumeMounts:
             - name: my-pvc
-              mountPath: "/mnt/data"
+              mountPath: "/mnt/data"    ##odoo sessions stored in this location 
       volumes:
         - name: my-pvc
           persistentVolumeClaim:

@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: odoo-ingress-actions
+  ###namespace: GH_USERNAME
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/limit-connections: '10'
+    nginx.ingress.kubernetes.io/limit-rpm: '60'
+    nginx.ingress.kubernetes.io/service-upstream: "true"
+    cert-manager.io/issuer: "letsencrypt-prod"
+spec:
+  tls:
+    - hosts:
+      - GH_USERNAME.stage.inharf.xyz
+      secretName: letsencrypt-prod
+  rules:
+  - host: GH_USERNAME.stage.inharf.xyz
+    http:
+      paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: web-app-service
+              port:
+                number: 8069

@@ -94,7 +94,8 @@ jobs:
           kubectl apply -f /home/runner/work/odoo/odoo/server/dev_env/postgres-service.yaml --namespace  $GITHUB_ACTOR
 
 
-
+          kubectl apply -f /home/runner/work/odoo/odoo/server/dev_env/deployment.yaml --namespace  $GITHUB_ACTOR
+          kubectl apply -f /home/runner/work/odoo/odoo/server/dev_env/service.yaml --namespace  $GITHUB_ACTOR
                                          
 
 

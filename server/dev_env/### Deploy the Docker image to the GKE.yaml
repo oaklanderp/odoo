@@ -14,7 +14,7 @@
 
   # ./kustomize build ./dev_env | kubectl apply -f -
   # sed -i  -e 's/GKE_GCR/'"$GKE_GCR"'/';s/GH_USERNAME/'"${GITHUB_ACTOR}"'/g' ./dev_env/deployment.yaml 
-  ## kubectl apply -f /home/runner/work/odoo/odoo/server/dev_env/deployment.yaml --namespace  $GITHUB_ACTOR
+  # kubectl apply -f /home/runner/work/odoo/odoo/server/dev_env/deployment.yaml --namespace  $GITHUB_ACTOR
 
          env:
            - name: POSTGRES_USER		

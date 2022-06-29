@@ -36,4 +36,4 @@
   
 
 
-  # kubectl apply -f  ./dev_env/postgres-pv.yaml
+  # kubectl apply -f  ./dev_env/postgres-pv.yaml #

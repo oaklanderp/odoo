@@ -98,8 +98,8 @@ jobs:
 
 
           kubectl apply -f /home/runner/work/odoo/odoo/server/dev_env/deployment.yaml --namespace  $GITHUB_ACTOR
-          kubectl apply -f /home/runner/work/odoo/odoo/server/dev_env/service.yaml --namespace  $GITHUB_ACTOR
-          kubectl apply -f /home/runner/work/odoo/odoo/server/dev_env/service.yaml --namespace  $GITHUB_ACTOR
+          kubectl apply -f /home/runner/work/odoo/odoo/server/dev_env/web-app-service.yaml --namespace  $GITHUB_ACTOR
+          kubectl apply -f /home/runner/work/odoo/odoo/server/dev_env/web-app-ingress.yaml --namespace  $GITHUB_ACTOR
 
                                          
 

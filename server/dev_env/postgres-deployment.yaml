@@ -22,7 +22,10 @@ spec:
        - name: postgres
          image: postgres:14
          args: ["-c", "max_connections=1000"]  
-         args: ["-c", create user root"]
+         lifecycle:
+           postStart:
+                exec:
+                  command: ["/bin/sh", "-c", "su - postgres -c 'createuser -s odoo' "]
          resources:
            limits:
              cpu: "1"

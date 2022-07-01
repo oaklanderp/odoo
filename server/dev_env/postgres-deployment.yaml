@@ -25,7 +25,7 @@ spec:
          lifecycle:
            postStart:
                 exec:
-                  # command: ["/bin/sh", "-c", "su - postgres -c 'createuser -s odoo' "]
+                  # # command: ["/bin/sh", "-c", "su - postgres -c 'createuser -s odoo' "]
                    command: ["/bin/sh", "-c", " adduser  odoo  "]
                   #command: ["/bin/sh", "-c", "su - postgres && psql -c 'CREATEUSER eman   WITH PASSWORD 'eman';'"]
 

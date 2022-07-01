@@ -53,7 +53,8 @@ jobs:
       # copy odoo EE official repo to our repo
       - name: ADDONS
         run: |
-          mkdir -p  /home/runner/work/odoo/odoo/server/addons_dependencies && git clone https://oaklanderp:"$ACCESS_TOKEN"@github.com/odoo/enterprise --depth 1 --branch 15.0 /home/runner/work/odoo/odoo/server/addons_dependencies 
+          mkdir -p  /home/runner/work/odoo/odoo/server/addons_dependencies && git clone https://oaklanderp:"$ACCESS_TOKEN"@github.com/odoo/enterprise --depth 1 --branch 15.0 /home/runner/work/odoo/odoo/server/addons_dependencies &&           sed -i -e 's/ODOO_PASSWORD/'"$MASTER_PASSWORD"'/' ./image-configs/dev.conf
+
       # Build the Docker image  
       - name: Build
         run: |
@@ -90,7 +91,6 @@ jobs:
 
           sed -i -e 's/GH_USERNAME/'"${GITHUB_ACTOR}"'/' ./dev_env/postgres-pv.yaml
           sed -i -e 's/REGISTRY_HOSTNAME/'"$REGISTRY_HOSTNAME"'/' ./dev_env/deployment.yaml
-          sed -i -e 's/ODOO_PASSWORD/'"$MASTER_PASSWORD"'/' ./image-configs/dev.conf
 
 
           kubectl apply -f /home/runner/work/odoo/odoo/server/dev_env/namespace.yaml 

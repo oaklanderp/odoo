@@ -90,7 +90,7 @@ jobs:
 
           sed -i -e 's/GH_USERNAME/'"${GITHUB_ACTOR}"'/' ./dev_env/postgres-pv.yaml
           sed -i -e 's/REGISTRY_HOSTNAME/'"$REGISTRY_HOSTNAME"'/' ./dev_env/deployment.yaml
-          sed -i -e 's/ODOO_PASSWORD/'"${{ secrets.MASTER_PASSWORD}}"'/' ./image-configs/dev.conf
+          sed -i -e 's/ODOO_PASSWORD/'"$MASTER_PASSWORD"'/' ./image-configs/dev.conf
 
 
           kubectl apply -f /home/runner/work/odoo/odoo/server/dev_env/namespace.yaml 

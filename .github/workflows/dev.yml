@@ -24,7 +24,7 @@ env:
   GKE_GCR:  ${{ secrets.GKE_GCR }}
   GKE_CLUSTER: cluster-1
   ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-  ODOO_PASSWORD: ${{ secrets.MASTER_PASSWORD }}
+  rODOO_PASSWORD: ${{ secrets.MASTER_PASSWORD }}
   IMAGE: web-app
   REGISTRY_HOSTNAME: gcr.io
   DEPLOYMENT_NAME: web-app
@@ -54,9 +54,9 @@ jobs:
       - name: ADDONS
         run: |
           mkdir -p  /home/runner/work/odoo/odoo/server/addons_dependencies && git clone https://oaklanderp:"$ACCESS_TOKEN"@github.com/odoo/enterprise --depth 1 --branch 15.0 /home/runner/work/odoo/odoo/server/addons_dependencies 
-      - name: ODOO-CONFIG
-        run: |  
-          sed -i  's/ODOO_PASSWORD/'"$MASTER_PASSWORD"'/' /home/runner/work/odoo/odoo/server/image-configs/dev.conf
+      # - name: ODOO-CONFIG
+      #   run: |  
+      #     sed -i  's/ODOO_PASSWORD/'"$MASTER_PASSWORD"'/' /home/runner/work/odoo/odoo/server/image-configs/dev.conf
 
 
       # Build the Docker image  

@@ -49,7 +49,10 @@ spec:
              valueFrom:
                secretKeyRef:
                  name: postgres-secret
-                 key: POSTGRES_PASSWORD         
+                 key: POSTGRES_PASSWORD  
+           - name: POSTGRES_DB
+             value: postgres
+
 
            - name: PGDATA
              value: /var/lib/postgresql/data/pgdata

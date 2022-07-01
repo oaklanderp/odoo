@@ -1,8 +1,8 @@
 kind: StorageClass
 apiVersion: storage.k8s.io/v1
 metadata:
-  name: regionalpd-storageclass
-  namespace: GH_USERNAME
+  name: regionalpd-storageclass-GH_USERNAME-1
+  namespace:  GH_USERNAME
 provisioner: kubernetes.io/gce-pd
 parameters:
   type: pd-ssd

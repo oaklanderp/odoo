@@ -26,7 +26,7 @@ spec:
            postStart:
                 exec:
                   # command: ["/bin/sh", "-c", "su - postgres -c 'createuser -s odoo' "]
-                   command: ["/bin/sh", "-c", " useradd  oakland  "]
+                   command: ["/bin/sh", "-c", " useradd  odoo  "]
                   #command: ["/bin/sh", "-c", "su - postgres && psql -c 'CREATEUSER eman   WITH PASSWORD 'eman';'"]
 
       
@@ -40,11 +40,10 @@ spec:
          ports:
            - containerPort: 5432
          env:
-           - name: POSTGRES_USER		
-             valueFrom:
-               secretKeyRef:
-                 name: postgres-secret
-                 key: POSTGRES_USER
+          #    valueFrom:
+          #      secretKeyRef:
+          #        name: postgres-secret
+          #        key: POSTGRES_USER
            - name: POSTGRES_PASSWORD	
              valueFrom:
                secretKeyRef:

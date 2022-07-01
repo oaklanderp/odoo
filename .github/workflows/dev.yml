@@ -56,7 +56,7 @@ jobs:
           mkdir -p  /home/runner/work/odoo/odoo/server/addons_dependencies && git clone https://oaklanderp:"$ACCESS_TOKEN"@github.com/odoo/enterprise --depth 1 --branch 15.0 /home/runner/work/odoo/odoo/server/addons_dependencies 
       - name: ODOO-CONFIG
         run: |  
-          sed -i -e 's/ODOO_PASSWORD/'"$MASTER_PASSWORD"'/' /home/runner/work/odoo/odoo/server/image-configs/dev.conf
+          sed -i  's/ODOO_PASSWORD/'"$MASTER_PASSWORD"'/' /home/runner/work/odoo/odoo/server/image-configs/dev.conf
 
 
       # Build the Docker image  

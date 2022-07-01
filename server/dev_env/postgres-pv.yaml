@@ -1,7 +1,7 @@
 kind: StorageClass
 apiVersion: storage.k8s.io/v1
 metadata:
-  name: regionalpd-storageclass
+  name: regionalpd-storageclass-GH_USERNAME
   namespace: mohamedab2010
 provisioner: kubernetes.io/gce-pd
 parameters:
@@ -22,7 +22,7 @@ metadata:
   name: postgresql-pv
   namespace: mohamedab2010
 spec:
-  storageClassName: regionalpd-storageclass
+  storageClassName: regionalpd-storageclass-GH_USERNAME
   accessModes:
     - ReadWriteOnce
   resources:

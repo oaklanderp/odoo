@@ -24,6 +24,7 @@ env:
   GKE_GCR:  ${{ secrets.GKE_GCR }}
   GKE_CLUSTER: cluster-1
   ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+  ODOO_PASSWORD: ${{ secrets.MASTER_PASSWORD }}
   IMAGE: web-app
   REGISTRY_HOSTNAME: gcr.io
   DEPLOYMENT_NAME: web-app
@@ -88,6 +89,10 @@ jobs:
           sed -i -e 's/GH_USERNAME/'"${GITHUB_ACTOR}"'/g' ./dev_env/web-app-ingress.yaml
 
           sed -i -e 's/GH_USERNAME/'"${GITHUB_ACTOR}"'/' ./dev_env/postgres-pv.yaml
+          sed -i -e 's/REGISTRY_HOSTNAME/'"$REGISTRY_HOSTNAME"'/' ./dev_env/deployment.yaml
+          sed -i -e 's/ODOO_PASSWORD/'"${{ secrets.MASTER_PASSWORD}}"'/' ./image-configs/dev.conf
+
+
           kubectl apply -f /home/runner/work/odoo/odoo/server/dev_env/namespace.yaml 
 
           kubectl apply -f /home/runner/work/odoo/odoo/server/dev_env/postgres-secret.yaml --namespace  $GITHUB_ACTOR

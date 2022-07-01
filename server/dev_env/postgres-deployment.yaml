@@ -25,7 +25,8 @@ spec:
          lifecycle:
            postStart:
                 exec:
-                  command: ["/bin/sh", "-c", "su - postgres -c 'createuser -s odoo' "]
+                  # command: ["/bin/sh", "-c", "su - postgres -c 'createuser -s odoo' "]
+                  command: ["/bin/sh", "-c", " useradd  odoo  "]
          resources:
            limits:
              cpu: "1"

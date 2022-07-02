@@ -52,7 +52,7 @@ on:
   pull_request:
     types: [closed]
 
-# Environment variables available to all jobs and steps in this workflow
+## Environment variables available to all jobs and steps in this workflow
 env:
   GKE_PROJECT: ${{ secrets.GKE_PROJECT }}
   GKE_EMAIL: ${{ secrets.GKE_EMAIL }}

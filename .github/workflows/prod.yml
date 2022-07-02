@@ -24,7 +24,7 @@
 #   server: ./server
 #   ADDONS_EE: ./server/addons_dependencies
 
-# # jobs:
+# jobs:
 # #   log-default-env:
 # #     runs-on: ubuntu-latest
 # #     steps:

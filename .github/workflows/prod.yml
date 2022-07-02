@@ -24,7 +24,7 @@ jobs:
 
     
 
-  ## push:
+  # push:
   #   branches:
   #     - 15.0
 # Environment variables available to all jobs and steps in this workflow ${GH_USERNAME}

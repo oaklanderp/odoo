@@ -27,7 +27,7 @@ jobs:
   # push:
   #   branches:
   #     - 15.0
-# Environment variables available to all jobs and steps in this workflow ${GH_USERNAME}
+#@ Environment variables available to all jobs and steps in this workflow ${GH_USERNAME}
 env:
   GKE_PROJECT: ${{ secrets.GKE_PROJECT }}
   GKE_EMAIL: ${{ secrets.GKE_EMAIL }}

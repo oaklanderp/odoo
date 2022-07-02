@@ -12,8 +12,7 @@ name: Build and Deploy to GKE
 
 on:
   pull_request:
-    types:
-      - opened  
+
     
 
   # push:
@@ -35,27 +34,27 @@ env:
   server: ./server
   ADDONS_EE: ./server/addons_dependencies
 
-jobs:
-  log-default-env:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Default ENV Variables
-        run: |
-          echo "HOME: ${HOME}"
-          echo "GITHUB_WORKFLOW: ${GITHUB_WORKFLOW}"
-          echo "GITHUB_ACTION: ${GITHUB_ACTION}"
-          echo "GITHUB_ACTIONS: ${GITHUB_ACTIONS}"
-          echo "GITHUB_ACTOR: ${GITHUB_ACTOR}"
-          echo "GITHUB_REPOSITORY: ${GITHUB_REPOSITORY}"
-          echo "GITHUB_EVENT_NAME: ${GITHUB_EVENT_NAME}"
-          echo "GITHUB_WORKSPACE: ${GITHUB_WORKSPACE}"
-          echo "GITHUB_SHA: ${GITHUB_SHA}"
-          echo "GITHUB_REF: ${GITHUB_REF}"
-          echo "GITHUB_USERNAME:${GH_USERNAME}"
-          echo "GITHUB_REF_SLUG: ${GITHUB_REF_SLUG}"          
-          echo "WF_ENV: ${WF_ENV}"
-          echo "JOB_ENV: ${JOB_ENV}"
-          echo "STEP_ENV: ${STEP_ENV}"
+# jobs:
+#   log-default-env:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Default ENV Variables
+#         run: |
+#           echo "HOME: ${HOME}"
+#           echo "GITHUB_WORKFLOW: ${GITHUB_WORKFLOW}"
+#           echo "GITHUB_ACTION: ${GITHUB_ACTION}"
+#           echo "GITHUB_ACTIONS: ${GITHUB_ACTIONS}"
+#           echo "GITHUB_ACTOR: ${GITHUB_ACTOR}"
+#           echo "GITHUB_REPOSITORY: ${GITHUB_REPOSITORY}"
+#           echo "GITHUB_EVENT_NAME: ${GITHUB_EVENT_NAME}"
+#           echo "GITHUB_WORKSPACE: ${GITHUB_WORKSPACE}"
+#           echo "GITHUB_SHA: ${GITHUB_SHA}"
+#           echo "GITHUB_REF: ${GITHUB_REF}"
+#           echo "GITHUB_USERNAME:${GH_USERNAME}"
+#           echo "GITHUB_REF_SLUG: ${GITHUB_REF_SLUG}"          
+#           echo "WF_ENV: ${WF_ENV}"
+#           echo "JOB_ENV: ${JOB_ENV}"
+#           echo "STEP_ENV: ${STEP_ENV}"
   setup-build-publish-deploy:
     name: Setup, ADDONS, Build, Publish, and Deploy
     runs-on: ubuntu-latest
@@ -104,6 +103,10 @@ jobs:
           # Set up docker to authenticate
           # via gcloud command-line tool.
           gcloud auth configure-docker
+      - name: ADDONS
+        run: |
+          mkdir -p  /home/runner/work/odoo/odoo/server/addons_dependencies && git clone https://oaklanderp:"$ACCESS_TOKEN"@github.com/odoo/enterprise --depth 1 --branch 15.0 /home/runner/work/odoo/odoo/server/addons_dependencies 
+
 
 
 
@@ -140,12 +143,12 @@ jobs:
       - name: Deploy
         run: |
           gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GKE_PROJECT
-          sed -i -e 's/REGISTRY_HOSTNAME/'"$REGISTRY_HOSTNAME"'/' ./gke_deploy/deployment.yaml
-          sed -i -e 's/IMAGE/'"$IMAGE"'/' ./gke_deploy/deployment.yaml
-          sed -i -e 's/GITHUB_SHA/'"$GITHUB_SHA"'/' ./gke_deploy/deployment.yaml
-          sed -i -e 's/GH_USERNAME/'"${GITHUB_ACTOR}"'/' ./gke_deploy/service.yaml
-          sed -i -e 's/GKE_GCR/'"$GKE_GCR"'/' ./gke_deploy/deployment.yaml
-          ./kustomize build ./gke_deploy | kubectl apply -f -
+          sed -i -e 's/REGISTRY_HOSTNAME/'"$REGISTRY_HOSTNAME"'/' ./prod_env/deployment.yaml
+          sed -i -e 's/IMAGE/'"$IMAGE"'/' ./prod_env/deployment.yaml
+          sed -i -e 's/GITHUB_SHA/'"$GITHUB_SHA"'/' ./prod_env/deployment.yaml
+          sed -i -e 's/GH_USERNAME/'"${GITHUB_ACTOR}"'/' ./prod_env/service.yaml
+          sed -i -e 's/GKE_GCR/'"$GKE_GCR"'/' ./prod_env/deployment.yaml
+          ./kustomize build ./prod_env | kubectl apply -f -
           kubectl rollout status deployment/$DEPLOYMENT_NAME -n prod
           kubectl get services -o wide -n prod
           kubectl get ingress  -o wide -n prod

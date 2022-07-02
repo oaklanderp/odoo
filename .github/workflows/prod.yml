@@ -48,8 +48,9 @@
 name: Build and Deploy to GKE
 
 on:
-  pull_request:
-    types: [closed]
+    push:
+  #pull_request:
+    #types: [closed]
 
 # Environment variables available to all jobs and steps in this workflow
 env:

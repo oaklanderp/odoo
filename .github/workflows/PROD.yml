@@ -57,6 +57,7 @@ env:
   GKE_PROJECT: ${{ secrets.GKE_PROJECT }}
   GKE_EMAIL: ${{ secrets.GKE_EMAIL }}
   GITHUB_SHA: ${{ github.sha }}
+  ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
   GKE_ZONE: europe-west1-b
   GKE_CLUSTER: cluster-1
   IMAGE: web-app

@@ -18,7 +18,7 @@ name: Build and Deploy to GKE
 # # Environment variables available to all jobs and steps in this workflow ${GH_USERNAME}
 on:
   pull_request:
-    types: [create]
+    types: [review_requested]
 env:
   GKE_PROJECT: ${{ secrets.GKE_PROJECT }}
   GKE_EMAIL: ${{ secrets.GKE_EMAIL }}

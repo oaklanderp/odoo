@@ -70,10 +70,8 @@ env:
   ADDONS_EE: ./server/addons_dependencies
 
 jobs:
-  if_merged:
-
+      name: Setup, Build, Publish, and Deploy
       if: github.event.pull_request.merged == true
-      # name: Setup, Build, Publish, and Deploy
       runs-on: ubuntu-latest
       steps:
       - name: Checkout

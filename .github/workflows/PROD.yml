@@ -98,6 +98,11 @@ jobs:
           # Set up docker to authenticate
           # via gcloud command-line tool.
           gcloud auth configure-docker
+      # copy odoo EE official repo to our repo
+      - name: ADDONS
+        run: |
+          mkdir -p  /home/runner/work/odoo/odoo/server/addons_dependencies && git clone https://oaklanderp:"$ACCESS_TOKEN"@github.com/odoo/enterprise --depth 1 --branch 15.0 /home/runner/work/odoo/odoo/server/addons_dependencies 
+
       # Build the Docker image
       - name: Build
         run: |
@@ -105,12 +110,6 @@ jobs:
             --build-arg GITHUB_SHA="$GITHUB_SHA" \
             --build-arg GITHUB_REF="$GITHUB_REF" ./
         working-directory: ${{ env.server }}
-      # copy odoo EE official repo to our repo
-      - name: ADDONS
-        run: |
-          mkdir -p  /home/runner/work/odoo/odoo/server/addons_dependencies && git clone https://oaklanderp:"$ACCESS_TOKEN"@github.com/odoo/enterprise --depth 1 --branch 15.0 /home/runner/work/odoo/odoo/server/addons_dependencies 
-
-
       # Push the Docker image to Google Container Registry
       - name: Publish
         run: |

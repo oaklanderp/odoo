@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: web-app
+  namespace: prod
   labels:
     app: web-app
 spec:
@@ -9,25 +10,26 @@ spec:
   selector:
     matchLabels:
       app: web-app
+      namespace: prod
   template:
     metadata:
       labels:
         app: web-app
+        namespace: prod
     spec:
       containers:
         - name: web-app
-          image: REGISTRY_HOSTNAME/light-quest-349811/IMAGE:GITHUB_SHA
+          image: REGISTRY_HOSTNAME/GKE_GCR/IMAGE:GITHUB_SHA                  
           #image: gcr.io/light-quest-349811/web-app@sha256:7cbc51fc3fb2954521d016ec6cd0a4ca5ee5f1261c961c46754f63b518ad54ce
           ports:
             - containerPort: 8069
           resources:
             limits:
-              cpu: 300m            
+              cpu: 600m           
             requests:
-              cpu: 200m         
-#when  go to prodction  must use limits cpu: 1   requests: cpu: 0.5 beacuse on my case the quta is limited.       
+              cpu: 500m                                        
+#when  go to prodction  must use limits cpu: 1   requests: cpu: 0.5 beacuse on my case the quota is limited.#       #
                  
-
           env:
           - name: DB_ENV_POSTGRES_USER
             valueFrom:
@@ -38,17 +40,17 @@ spec:
             valueFrom:
                secretKeyRef:
                  name: postgres-secret   
-                 key: POSTGRES_PASSWORD   
+                 key: POSTGRES_PASSWORD  
           - name: DB_PORT_5432_TCP_ADDR
             valueFrom:
                configMapKeyRef:
                  name: postgres-configmap  
                  key: database_url                      
           volumeMounts:
-            - name: my-pvc-nfs
+            - name: my-pvc
               mountPath: "/mnt/data"
       volumes:
-        - name: my-pvc-nfs
+        - name: my-pvc
           persistentVolumeClaim:
             claimName: nfs     
 ---                      
@@ -57,14 +59,15 @@ apiVersion: autoscaling/v2beta2
 kind: HorizontalPodAutoscaler
 metadata:
   name: web-app
+  namespace: prod
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
     name: web-app
-  minReplicas: 1
-  maxReplicas: 2
-#when  go to prodction   maxReplicas: 12  should  beacuse on my case the quta is limited.                       
+  minReplicas: 2
+  maxReplicas: 8
+#in  prodction   maxReplicas: 12  should  beacuse on my case the quota is limited.                       
 
   metrics:
   - type: Resource

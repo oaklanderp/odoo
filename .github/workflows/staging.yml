@@ -88,6 +88,8 @@ jobs:
         run: |
           gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GKE_PROJECT
           sed -i -e 's/REGISTRY_HOSTNAME/'"$REGISTRY_HOSTNAME"'/' ./staging_env/deployment.yaml
+          sed -i   's/GKE_GCR/'"$GKE_GCR"'/' ./staging_env/deployment.yaml
+
           sed -i -e 's/IMAGE/'"$IMAGE"'/' ./staging_env/deployment.yaml
           sed -i -e 's/GITHUB_SHA/'"$GITHUB_SHA"'/' ./staging_env/deployment.yaml
 
@@ -107,6 +109,8 @@ jobs:
           kubectl apply -f /home/runner/work/odoo/odoo/server/staging_env/deployment.yaml --namespace  staging
           kubectl apply -f /home/runner/work/odoo/odoo/server/staging_env/web-app-service.yaml --namespace  staging
           kubectl apply -f /home/runner/work/odoo/odoo/server/staging_env/web-app-ingress.yaml --namespace  staging
+
+           
 
                                          
 

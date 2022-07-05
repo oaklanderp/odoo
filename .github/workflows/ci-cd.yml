@@ -80,7 +80,7 @@ jobs:
       - name: Deploy
         run: |
           gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GKE_PROJECT
-          sed -i -e 's/REGISTRY_HOSTNAME/'"$REGISTRY_HOSTNAME"'/' ./dev_env/deployment.yaml
+          sed -i -e 's/REGISTRY_HOSTNAME/'"$REGISTRY_HOSTNAME"'/' ./server/dev_env/deployment.yaml
           sed -i   's/GKE_GCR/'"$GKE_GCR"'/' ./staging_env/deployment.yaml
 
           sed -i -e 's/IMAGE/'"$IMAGE"'/' ./staging_env/deployment.yaml

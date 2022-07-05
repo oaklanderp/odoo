@@ -24,7 +24,7 @@ env:
 
 jobs:
   Build-DeployStaging:
-    name: Setup, Build, Publish, and Deploy 
+    name:  Deploy to staging
     runs-on: ubuntu-latest
     environment: 
           name: staging
@@ -38,15 +38,6 @@ jobs:
           version: "270.0.0"
           service_account_email: ${{ secrets.GKE_EMAIL }}
           service_account_key: ${{ secrets.GKE_KEY }}
-  # DeployStaging:
-  #   name: Deploy to Staging 
-  #   # if: "github.event.pull_request.merged == true"
-  #   needs: [Build-Setup-Publish-Deploy]
-  #   runs-on: ubuntu-latest
-  #   environment: 
-  #     name: staging
-  #     url: 'http://staging.stage.inharf.xyz'
-  #   steps:
       - run: |
           # Set up docker to authenticate
           # via gcloud command-line tool.
@@ -92,16 +83,17 @@ jobs:
 
           kubectl apply -f ./server/staging_env/namespace.yaml 
 
-          kubectl apply -f /home/runner/work/odoo/odoo/server/staging_env/postgres-secret.yaml --namespace  staging
-          kubectl apply -f /home/runner/work/odoo/odoo/server/staging_env/postgres-configmap.yaml --namespace  staging
-          kubectl apply -f /home/runner/work/odoo/odoo/server/staging_env/postgres-pv.yaml --namespace  staging
-          kubectl apply -f /home/runner/work/odoo/odoo/server/staging_env/postgres-deployment.yaml --namespace  staging
-          kubectl apply -f /home/runner/work/odoo/odoo/server/staging_env/postgres-service.yaml --namespace  staging
+          kubectl apply -f ./server/staging_env/postgres-secret.yaml --namespace  staging
+          kubectl apply -f ./server/staging_env/postgres-configmap.yaml --namespace  staging
+          kubectl apply -f ./server/staging_env/postgres-pv.yaml --namespace  staging
+          kubectl apply -f ./server/staging_env/postgres-deployment.yaml --namespace  staging
+          kubectl apply -f ./server/staging_env/postgres-service.yaml --namespace  staging
 
 
-          kubectl apply -f /home/runner/work/odoo/odoo/server/staging_env/deployment.yaml --namespace  staging
-          kubectl apply -f /home/runner/work/odoo/odoo/server/staging_env/web-app-service.yaml --namespace  staging
-          kubectl apply -f /home/runner/work/odoo/odoo/server/staging_env/web-app-ingress.yaml --namespace  staging
+          kubectl apply -f ./server/staging_env/deployment.yaml --namespace  staging
+          kubectl apply -f ./server/staging_env/web-app-service.yaml --namespace  staging
+          kubectl apply -f ./server/staging_env/web-app-ingress.yaml --namespace  staging
+      
   Deployprod:
     name: Deploy to Production
     needs: [Build-DeployStaging]

@@ -24,7 +24,7 @@ env:
 
 jobs:
   Build-DeployStaging:
-    name:  Deploy to staging
+    name:  Deploy to Staging
     runs-on: ubuntu-latest
     environment: 
           name: staging
@@ -92,31 +92,23 @@ jobs:
 
           kubectl apply -f ./server/staging_env/deployment.yaml --namespace  staging
           kubectl apply -f ./server/staging_env/web-app-service.yaml --namespace  staging
-          kubectl apply -f ./server/staging_env/web-app-ingress.yaml --namespace  staging
-jobs:      
-  Deployprod:
-    env:
-      GKE_PROJECT: ${{ secrets.GKE_PROJECT }}
-      GKE_EMAIL: ${{ secrets.GKE_EMAIL }}
-      GITHUB_SHA: ${{ github.sha }}
-      GKE_ZONE: ${{ secrets.GKE_ZONE }}
-      GKE_GCR:  ${{ secrets.GKE_GCR }}
-      GKE_CLUSTER: cluster-1
-      ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-      rODOO_PASSWORD: ${{ secrets.MASTER_PASSWORD }}
-      IMAGE: web-app
-      REGISTRY_HOSTNAME: gcr.io
-      DEPLOYMENT_NAME: web-app
-      NODE_ENV: production
-      server: ./server
-      ADDONS_EE: ./server/addons_dependencies
-
+          kubectl apply -f ./server/staging_env/web-app-ingress.yaml --namespace  staging      
+  Deployprod:    
     name: Deploy to Production
     needs: [Build-DeployStaging]
     runs-on: ubuntu-latest
     environment: 
       name: Prod
-      url: 'https://prod.stage.inharf.xyz'    
+      url: 'https://prod.stage.inharf.xyz'   
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+    
+      - uses: google-github-actions/setup-gcloud@v0
+        with:
+          version: "270.0.0"
+          service_account_email: ${{ secrets.GKE_EMAIL }}
+          service_account_key: ${{ secrets.GKE_KEY }}            
     steps:
       - run: |
           # Set up docker to authenticate

@@ -95,6 +95,22 @@ jobs:
           kubectl apply -f ./server/staging_env/web-app-ingress.yaml --namespace  staging
       
   Deployprod:
+    env:
+      GKE_PROJECT: ${{ secrets.GKE_PROJECT }}
+      GKE_EMAIL: ${{ secrets.GKE_EMAIL }}
+      GITHUB_SHA: ${{ github.sha }}
+      GKE_ZONE: ${{ secrets.GKE_ZONE }}
+      GKE_GCR:  ${{ secrets.GKE_GCR }}
+      GKE_CLUSTER: cluster-1
+      ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+      rODOO_PASSWORD: ${{ secrets.MASTER_PASSWORD }}
+      IMAGE: web-app
+      REGISTRY_HOSTNAME: gcr.io
+      DEPLOYMENT_NAME: web-app
+      NODE_ENV: production
+      server: ./server
+      ADDONS_EE: ./server/addons_dependencies
+
     name: Deploy to Production
     needs: [Build-DeployStaging]
     runs-on: ubuntu-latest

@@ -38,6 +38,7 @@ env:
 jobs:
   setup-build-publish-deploy:
     name: Setup, ADDONS, Build, Publish, and Deploy
+    if: "github.event.pull_request.merged == true"
     runs-on: ubuntu-latest
     steps: 
       - name: Checkout
@@ -94,10 +95,19 @@ jobs:
           sed -i -e 's/GITHUB_SHA/'"$GITHUB_SHA"'/' ./dev_env/deployment.yaml
 
           sed -i -e 's/GH_USERNAME/'"${GITHUB_ACTOR}"'/' ./dev_env/web-app-service.yaml
-          sed -i -e 's/GH_USERNAME/'"${GITHUB_ACTOR}"'/g' ./dev_env/web-app-ingress.yaml
+          sed -i -e 's/GH_USERNAME/'"${GITHUB_ACTOR}"'/g' ./dev_env/ingress-dev.yaml
+          sed -i -e 's/GH_USERNAME/'"${GITHUB_ACTOR}"'/g' ./dev_env/letsencrypt-issuer-dev.yml
+          kubectl apply -f /home/runner/work/odoo/odoo/server/dev_env/web-app-ingress.yaml --namespace  $GITHUB_ACTOR
+
 
           sed -i -e 's/GH_USERNAME/'"${GITHUB_ACTOR}"'/' ./dev_env/postgres-pv.yaml
           sed -i -e 's/REGISTRY_HOSTNAME/'"$REGISTRY_HOSTNAME"'/' ./dev_env/deployment.yaml
+          sed -i -e 's/GH_USERNAME/'"${GITHUB_ACTOR}"'/' ./dev_env/web-app-service.yaml
+          sed -i -e 's/GH_USERNAME/'"${GITHUB_ACTOR}"'/g' ./dev_env/ingress-dev.yml
+          sed -i -e 's/GH_USERNAME/'"${GITHUB_ACTOR}"'/g' ./dev_env/letsencrypt-issuer-dev.yml
+          kubectl apply -f /home/runner/work/odoo/odoo/server/dev_env/ingress-dev.yml --namespace  $GITHUB_ACTOR
+          kubectl apply -f /home/runner/work/odoo/odoo/server/dev_env/letsencrypt-issuer-dev.yml --namespace  $GITHUB_ACTOR
+          kubectl get order -n $GITHUB_ACTOR
 
 
           kubectl apply -f /home/runner/work/odoo/odoo/server/dev_env/namespace.yaml 

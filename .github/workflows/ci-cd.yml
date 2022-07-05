@@ -94,7 +94,6 @@ jobs:
 
           kubectl apply -f ./server/staging_env/deployment.yaml --namespace  staging
           kubectl apply -f ./server/staging_env/web-app-service.yaml --namespace  staging
-          kubectl apply -f ./server/staging_env/web-app-ingress.yaml --namespace  staging      
   Deployprod:    
     name: Deploy to Production
     needs: [Build-DeployStaging]

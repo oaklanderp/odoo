@@ -23,9 +23,12 @@ env:
   ADDONS_EE: ./server/addons_dependencies
 
 jobs:
-  Build-Setup-Publish-Deploy:
-    name: Setup, Build, Publish, and Deploy
+  Build & DeployStaging:
+    name: Setup, Build, Publish, and Deploy to Staging
     runs-on: ubuntu-latest
+    environment: 
+          name: staging
+          url: 'http://staging.stage.inharf.xyz'    
     steps:
       - name: Checkout
         uses: actions/checkout@v3

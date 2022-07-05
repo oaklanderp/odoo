@@ -38,7 +38,6 @@ env:
 jobs:
   setup-build-publish-deploy:
     name: Setup, ADDONS, Build, Publish, and Deploy
-    if: "github.event.pull_request.merged == true"
     runs-on: ubuntu-latest
     steps: 
       - name: Checkout

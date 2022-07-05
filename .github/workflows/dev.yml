@@ -93,9 +93,6 @@ jobs:
           sed -i -e 's/IMAGE/'"$IMAGE"'/' ./dev_env/deployment.yaml
           sed -i -e 's/GITHUB_SHA/'"$GITHUB_SHA"'/' ./dev_env/deployment.yaml
 
-          sed -i -e 's/GH_USERNAME/'"${GITHUB_ACTOR}"'/' ./dev_env/web-app-service.yaml
-          sed -i -e 's/GH_USERNAME/'"${GITHUB_ACTOR}"'/g' ./dev_env/ingress-dev.yaml
-          sed -i -e 's/GH_USERNAME/'"${GITHUB_ACTOR}"'/g' ./dev_env/letsencrypt-issuer-dev.yml
           kubectl apply -f /home/runner/work/odoo/odoo/server/dev_env/web-app-ingress.yaml --namespace  $GITHUB_ACTOR
 
 

@@ -90,7 +90,7 @@ jobs:
           sed -i -e 's/REGISTRY_HOSTNAME/'"$REGISTRY_HOSTNAME"'/' ./server/staging_env/deployment.yaml
 
 
-          kubectl apply -f /home/runner/work/odoo/odoo/server/staging_env/namespace.yaml 
+          kubectl apply -f ./server/staging_env/namespace.yaml 
 
           kubectl apply -f /home/runner/work/odoo/odoo/server/staging_env/postgres-secret.yaml --namespace  staging
           kubectl apply -f /home/runner/work/odoo/odoo/server/staging_env/postgres-configmap.yaml --namespace  staging

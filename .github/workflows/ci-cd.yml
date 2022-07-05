@@ -23,7 +23,7 @@ env:
   ADDONS_EE: ./server/addons_dependencies
 
 jobs:
-  Build & DeployStaging:
+  Build-DeployStaging:
     name: Setup, Build, Publish, and Deploy 
     runs-on: ubuntu-latest
     environment: 

@@ -35,15 +35,15 @@ jobs:
           version: "270.0.0"
           service_account_email: ${{ secrets.GKE_EMAIL }}
           service_account_key: ${{ secrets.GKE_KEY }}
-  DeployStaging:
-    name: Deploy to Staging 
-    # if: "github.event.pull_request.merged == true"
-    needs: [Build-Setup-Publish-Deploy]
-    runs-on: ubuntu-latest
-    environment: 
-      name: staging
-      url: 'http://staging.stage.inharf.xyz'
-    steps:
+  # DeployStaging:
+  #   name: Deploy to Staging 
+  #   # if: "github.event.pull_request.merged == true"
+  #   needs: [Build-Setup-Publish-Deploy]
+  #   runs-on: ubuntu-latest
+  #   environment: 
+  #     name: staging
+  #     url: 'http://staging.stage.inharf.xyz'
+  #   steps:
       - run: |
           # Set up docker to authenticate
           # via gcloud command-line tool.

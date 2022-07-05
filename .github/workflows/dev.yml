@@ -8,14 +8,7 @@
 #
 # 3. Change the values for the GKE_ZONE, GKE_CLUSTER, IMAGE, REGISTRY_HOSTNAME and DEPLOYMENT_NAME environment variables (below).
 
-name: Devloper  Environment
-
-# on:
-#   # pull_request:
-#   push:
-#     # branches:
-#     #   -${{ GITHUB_ACTOR }}
-# # Environment variables available to all jobs and steps in this workflow ${GH_USERNAME}
+name: Devlopers  Environment
 on:
   pull_request:
     types: [review_requested,reopened]

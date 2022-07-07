@@ -20,7 +20,9 @@ Invoicing & Payments
         'views/report_invoice.xml',
         'views/account_move_views.xml',
         'views/pickup_point_views.xml',
+        'views/purchase_order.xml',
         'data/report_paperformat_data.xml',
+
     ],
     'installable': True,
     'application': True,

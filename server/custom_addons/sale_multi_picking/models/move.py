@@ -21,20 +21,20 @@ class Move(models.Model):
             if rec.picking_id:
                 if rec.fresh_type == 'fresh':
                     # sequence = self.env['ir.sequence'].next_by_code('fresh.picking')
-                    sequence = '%s/F' % self.origin
+                    sequence = '%s/F' % rec.origin
                     rec.picking_id.sudo().write({
                         'fresh_type': 'is_fresh',
                         'name': sequence,
                     })
                 if rec.fresh_type == 'none_fresh':
                     # sequence = self.env['ir.sequence'].next_by_code('nonfresh.picking')
-                    sequence = '%s/NF' % self.origin
+                    sequence = '%s/NF' % rec.origin
                     rec.picking_id.sudo().write({
                         'fresh_type': 'is_non_fresh',
                         'name': sequence,
                     })
                 if not rec.fresh_type:
-                    sequence = '%s' % self.origin
+                    sequence = '%s' % rec.origin
                     rec.picking_id.sudo().write({
                         'name': sequence,
                     })

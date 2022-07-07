@@ -12,7 +12,7 @@ OdooERP Sales
     'category': 'Sales/Sales',
     'author': 'OdooERP.ae, tou-odoo',
     'website': 'https://odooerp.ae/',
-    'depends': ['oe_account', 'sale_stock'],
+    'depends': ['oe_account', 'sale_multi_picking'],
     'data': [
         'security/ir.model.access.csv',
         'data/so_state.xml',

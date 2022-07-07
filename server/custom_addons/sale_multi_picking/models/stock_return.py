@@ -20,15 +20,17 @@ class StockPickingInherit(models.Model):
                 html += ',%s - Qty: %s' % (line.product_id.name,line.product_uom_qty)
             rec.products_html = html
 
-    def generate_backorder_name(self, name, seq=1):
-        c_name = '%s/B/%s' % (name,seq)
-        check = self.env['stock.picking'].sudo().search([
-            ('name', '=', c_name)
-        ])
-        if check:
-            self.generate_backorder_name(name, seq+1)
-        else:
-            return c_name
+    def generate_backorder_name(self, name):
+        for seq in range(200):
+            if seq == 0:
+                continue
+            c_name = '%s/B/%s' % (name,seq)
+            check = self.env['stock.picking'].sudo().search([
+                ('name', '=', c_name)
+            ])
+            if not check:
+                return c_name
+
     @api.model
     def create(self, vals):
         print("HELLO {}".format(vals))
@@ -54,18 +56,21 @@ class StockPickingInherit(models.Model):
 class StockReturnPickingInherit(models.TransientModel):
     _inherit = 'stock.return.picking'
 
-    def generate_return_name(self, name, seq=1):
-        c_name = '%s/R/%s' % (name,seq)
-        check = self.env['stock.picking'].sudo().search([
-            ('name', '=', c_name)
-        ])
-        if check:
-            self.generate_return_name(name, seq+1)
-        else:
-            return c_name
+
+    def generate_return_name(self, name):
+        for seq in range(200):
+            if seq == 0:
+                continue
+            c_name = '%s/R/%s' % (name,seq)
+            check = self.env['stock.picking'].sudo().search([
+                ('name', '=', c_name)
+            ])
+            if not check:
+                return c_name
 
     def _prepare_picking_default_values(self):
         res = super(StockReturnPickingInherit, self)._prepare_picking_default_values()
         res['origin_picking_id'] = self.picking_id.id
         res['picking_return_name'] = self.generate_return_name(self.picking_id.name)
+        print(res)
         return res

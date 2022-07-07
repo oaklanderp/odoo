@@ -7,7 +7,16 @@
         <field name="arch" type="xml">
             <xpath expr="//group[@name='sale_header']//group[@name='partner_details']" position="inside">
                 <field name="pickup_point_id" options="{'no_create': True}"
-                       attrs="{'readonly': [('state', 'not in', ['draft', 'sent'])]}"/>
+                       attrs="{'readonly': [('state', 'in', ['cancel', 'sent'])]}"/>
+                <field name="external_id"/>
+                <field name="action_id"/>
+            </xpath>
+            <xpath expr="//group[@name='sale_header']//group[@name='order_details']" position="inside">
+                <label for="commitment_date" string="Delivery Date"/>
+                <div name="commitment_date_div" class="o_row">
+                    <field name="commitment_date" required="1"/>
+                    <span name="expected_date_span" class="text-muted">Expected: <field name="expected_date" widget="date"/></span>
+                </div>
             </xpath>
         </field>
     </record>

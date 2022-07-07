@@ -60,8 +60,9 @@ class ImportLine(models.TransientModel):
                     map(lambda row: isinstance(row.value, bytes) and row.value.encode('utf-8') or str(row.value),
                         sheet.row(row_no)))
                 # uom_id = self.env['uom.uom'].search([('name', '=', line[3])])
-                price = line[1]
-                product_id = self.env['product.product'].search(['|', ('name', '=', line[0]), ('default_code', '=', line[0])])
+                price = line[3]
+                product_c = str(line[0]).split('.')[0] if '.' in line[0] else line[0]
+                product_id = self.env['product.product'].search(['|', ('name', '=', line[0]), ('default_code', '=', product_c)])
                 if not product_id:
                     raise exceptions.ValidationError(
                         'Wrong Product Value In Row [{}: {}]'.format(row_no, line[0]))
@@ -80,7 +81,7 @@ class ImportLine(models.TransientModel):
                     'product_qty': line[2],
                     'product_uom': product_id.uom_id.id,
                     'price_unit': price,
-                    'taxes_id': [(6,0,product_id.taxes_id.ids)]
+                    'taxes_id': [(6,0,product_id.supplier_taxes_id.ids)]
                 })
 
 

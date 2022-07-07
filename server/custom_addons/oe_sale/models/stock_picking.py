@@ -36,3 +36,27 @@ class StockPicking(models.Model):
         if not invoice_ids:
             raise UserError(_('Invoice report not found!'))
         return self.env.ref('account.account_invoices').report_action(invoice_ids)
+
+    def action_cancel(self):
+        res = super().action_cancel()
+        for rec in self:
+            for move_id in rec.move_ids_without_package:
+                if move_id.sale_line_id:
+                    sol_product_uom_qty = move_id.sale_line_id.product_uom_qty - move_id.product_uom_qty
+                    move_id.sale_line_id.write({'product_uom_qty': sol_product_uom_qty})
+
+                    so_id = move_id.sale_line_id.order_id
+                    invoice_ids = so_id.invoice_ids.filtered(lambda inv: inv.state == 'posted')
+                    for invoice in invoice_ids:
+                        invoice.button_draft()
+                        for line in invoice.invoice_line_ids:
+                            if move_id.sale_line_id.product_id.id == line.product_id.id:
+                                line.with_context(check_move_validity=False).write({
+                                    'quantity': line.quantity - move_id.product_uom_qty
+                                })
+                        invoice.with_context(check_move_validity=False)._recompute_dynamic_lines(
+                            recompute_all_taxes=True,
+                            recompute_tax_base_amount=True,
+                        )
+                        invoice.action_post()
+        return res

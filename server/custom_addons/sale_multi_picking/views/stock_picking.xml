@@ -42,7 +42,8 @@
                     <attribute name="t-attf-class">oe_kanban_card</attribute>
                 </xpath>
                 <xpath expr="//kanban/templates/t[1]/div[1]" position="inside">
-                    <button class="btn btn-sm btn-primary" t-if="record.id.raw_value" t-attf-onclick="window.location.href='/web#id=#{record.id.raw_value}&amp;model=stock.picking&amp;view_type=form'">Edit</button>
+                    <!--t-attf-onclick="window.location.href='/web#id=#{record.id.raw_value}&amp;model=stock.picking&amp;view_type=form'"-->
+                    <button class="btn btn-sm btn-primary" t-if="record.id.raw_value" type="object" name="action_open_picking_client_action">Edit</button>
                     <button class="btn btn-sm btn-success" t-if="record.state.raw_value == 'assigned'" type="object" name="button_validate">Validate</button>
                     <div>
                         <t t-set="index" t-value="0" />

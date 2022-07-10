@@ -15,7 +15,9 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-max-temp-file-size: "1024m"
     nginx.ingress.kubernetes.io/proxy-http-version: "1.0"
     nginx.ingress.kubernetes.io/x-forwarded-prefix: "/path"
-    #nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    # nginx.ingress.kubernetes.io/proxy-redirect-from: http://GH_USERNAME.stage.inharf.xyz
+    # nginx.ingress.kubernetes.io/proxy-redirect-to: https://example.com/something
+    # #nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
 
 
 

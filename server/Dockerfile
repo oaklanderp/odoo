@@ -22,7 +22,7 @@ RUN chmod  777  /mount/data
 
 
 
-RUN pip3 install redis
+# RUN pip3 install redis
 
 #COPY addons_ci /mnt/addons_ci
 COPY image-configs/dev.conf /etc/odoo/odoo.conf

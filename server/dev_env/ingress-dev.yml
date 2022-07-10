@@ -9,14 +9,16 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-send-timeout: "10000s"
     nginx.ingress.kubernetes.io/proxy-read-timeout: "10000s"
     nginx.ingress.kubernetes.io/proxy-body-size: 10g
-    nginx.ingress.kubernetes.io/limit-connections: '10'
-    nginx.ingress.kubernetes.io/limit-rpm: '60'
-    nginx.ingress.kubernetes.io/service-upstream: "true"
-    nginx.ingress.kubernetes.io/client-body-buffer-size: 1M
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
-    nsm.nginx.com/enable-egress: "true"
-    #nginx.ingress.kubernetes.io/rewrite-target: /$2
-
+    nginx.ingress.kubernetes.io/client-body-buffer-size: 100m
+    # nginx.ingress.kubernetes.io/proxy-connect-timeout: "10000s"
+    # nginx.ingress.kubernetes.io/proxy-send-timeout: "10000s"
+    # nginx.ingress.kubernetes.io/proxy-read-timeout: "10000s"
+    # nginx.ingress.kubernetes.io/proxy-body-size: 10g
+    # nginx.ingress.kubernetes.io/limit-connections: '10'
+    # nginx.ingress.kubernetes.io/limit-rpm: '60'
+    # nginx.ingress.kubernetes.io/service-upstream: "true"
+    # nginx.ingress.kubernetes.io/client-body-buffer-size: 1M
+    # nginx.ingress.kubernetes.io/ssl-redirect: "true"
     #nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"    
 
 spec:
@@ -36,5 +38,6 @@ spec:
                 name: web-app-service
                 port:
                   number: 8069
-  ingressClassName: nginx                    
+  # ingressClassName: nginx                   
+
         

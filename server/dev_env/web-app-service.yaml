@@ -14,4 +14,3 @@ spec:
   selector:
     app: "web-app"
   clusterIP: None
-  #type: "LoadBalancer"

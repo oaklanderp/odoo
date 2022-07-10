@@ -10,9 +10,9 @@
 
 name: Devlopers  Environment
 on:
-  # pull_request:
-  #   types: [review_requested,reopened]
-  push:
+  pull_request:
+    types: [review_requested,reopened]
+  # push:
   
 env:
   GKE_PROJECT: ${{ secrets.GKE_PROJECT }}

@@ -13,6 +13,6 @@ spec:
       targetPort: 8069
   selector:
     app: "web-app"
-  # type: "LoadBalancer"
+  type: "LoadBalancer"
 
   #clusterIP: None

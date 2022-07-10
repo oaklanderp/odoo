@@ -14,7 +14,7 @@ metadata:
     nginx.ingress.kubernetes.io/connection-proxy-header: "keep-alive"
     nginx.ingress.kubernetes.io/proxy-max-temp-file-size: "1024m"
     # nginx.ingress.kubernetes.io/proxy-http-version: "1.0"
-    nginx.ingress.kubernetes.io/x-forwarded-prefix: "/path"
+    nginx.ingress.kubernetes.io/x-forwarded-prefix: "/path/*"
     nginx.ingress.kubernetes.io/proxy-redirect-from: http://10.92.3.199:8069
     nginx.ingress.kubernetes.io/proxy-redirect-to: https://GH_USERNAME.stage.inharf.xyz/*
     # #nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
@@ -40,25 +40,25 @@ metadata:
     # nginx.ingress.kubernetes.io/service-upstream: "true"
     # nginx.ingress.kubernetes.io/client-body-buffer-size: 1M
     # nginx.ingress.kubernetes.io/ssl-redirect: "true"
-    #nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"    
+    # nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"    
 
 spec:
   tls:
     - hosts:
       - GH_USERNAME.stage.inharf.xyz
       secretName: letsencrypt-prod  
-  # ingressClassName: nginx
-  # rules:
-  #   - host: GH_USERNAME.stage.inharf.xyz
-  #     http:
-  #       paths:
-  #         - path: /
-  #           pathType: Prefix
-  #           backend:
-  #             service:
-  #               name: web-app-service
-  #               port:
-  #                 number: 8069
+  ingressClassName: nginx
+  rules:
+    - host: GH_USERNAME.stage.inharf.xyz
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: web-app-service
+                port:
+                  number: 8069
   # ingressClassName: nginx                   
 
         

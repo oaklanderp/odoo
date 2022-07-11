@@ -22,7 +22,7 @@ metadata:
   name: postgresql-pv
   namespace: GH_USERNAME
 spec:
-  storageClassName: regionalpd-storageclass-GH_USERNAME
+  storageClassName: regionalpd-storageclass-GH_USERNAME-1
   accessModes:
     - ReadWriteOnce
   resources:

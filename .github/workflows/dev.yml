@@ -100,6 +100,9 @@ jobs:
 
 
           kubectl apply -f /home/runner/work/odoo/odoo/server/dev_env/namespace.yaml 
+          kubectl apply -f /home/runner/work/odoo/odoo/server/dev_env/deployment.yaml --namespace  $GITHUB_ACTOR
+          kubectl apply -f /home/runner/work/odoo/odoo/server/dev_env/web-app-service.yaml --namespace  $GITHUB_ACTOR
+
 
           kubectl apply -f /home/runner/work/odoo/odoo/server/dev_env/postgres-secret.yaml --namespace  $GITHUB_ACTOR
           kubectl apply -f /home/runner/work/odoo/odoo/server/dev_env/postgres-configmap.yaml --namespace  $GITHUB_ACTOR
@@ -108,8 +111,6 @@ jobs:
           kubectl apply -f /home/runner/work/odoo/odoo/server/dev_env/postgres-service.yaml --namespace  $GITHUB_ACTOR
 
 
-          kubectl apply -f /home/runner/work/odoo/odoo/server/dev_env/deployment.yaml --namespace  $GITHUB_ACTOR
-          kubectl apply -f /home/runner/work/odoo/odoo/server/dev_env/web-app-service.yaml --namespace  $GITHUB_ACTOR
 
                                          
 

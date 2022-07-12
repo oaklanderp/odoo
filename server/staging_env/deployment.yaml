@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: web-app
-  #: GH_USERNAME
+  namespace: staging
   labels:
     app: web-app
 spec:
@@ -10,12 +10,12 @@ spec:
   selector:
     matchLabels:
       app: web-app
-      #: GH_USERNAME
+      namespace: staging
   template:
     metadata:
       labels:
         app: web-app
-        #: GH_USERNAME
+        namespace: staging
     spec:
       containers:
         - name: web-app

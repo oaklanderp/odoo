@@ -78,6 +78,7 @@ jobs:
           sed -i -e 's/IMAGE/'"$IMAGE"'/' ./staging_env/deployment.yaml
           sed -i -e 's/GITHUB_SHA/'"$GITHUB_SHA"'/' ./staging_env/deployment.yaml
           ./kustomize build ./staging_env | kubectl apply -f -
+        working-directory: ${{ env.server }}          
 
          
 

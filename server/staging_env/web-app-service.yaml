@@ -3,7 +3,7 @@ apiVersion: "v1"
 kind: "Service"
 metadata:
   name: "web-app-service"
-  ###namespace: GH_USERNAME
+  namespace: staging
   labels:
     app: "web-app"
 spec:

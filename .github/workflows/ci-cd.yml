@@ -82,7 +82,7 @@ jobs:
           kubectl apply -f ./server/staging_env/postgres-secret.yaml --namespace  staging
           kubectl apply -f ./server/staging_env/postgres-configmap.yaml --namespace  staging
           kubectl apply -f ./server/staging_env/postgres-pv.yaml --namespace  staging
-          kubectl apply -f ./server/staging_env/postgres-deployment.yaml 
+          kubectl apply -f ./server/staging_env/postgres-deployment.yaml --namespace  staging
           kubectl apply -f ./server/staging_env/postgres-service.yaml --namespace  staging
           kubectl apply -f ./server/staging_env/deployment.yaml --namespace  staging
           kubectl apply -f ./server/staging_env/web-app-service.yaml --namespace  staging

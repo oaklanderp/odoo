@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: web-app
-  namespace: staging
+  #: GH_USERNAME
   labels:
     app: web-app
 spec:
@@ -10,12 +10,12 @@ spec:
   selector:
     matchLabels:
       app: web-app
-      namespace: staging
+      #: GH_USERNAME
   template:
     metadata:
       labels:
         app: web-app
-        namespace: staging
+        #: GH_USERNAME
     spec:
       containers:
         - name: web-app
@@ -53,9 +53,3 @@ spec:
       #   - name: my-pvc
       #     persistentVolumeClaim:
       #       claimName: nfs     
-
-
-
-
-
-                

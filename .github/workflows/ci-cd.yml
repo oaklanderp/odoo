@@ -78,6 +78,7 @@ jobs:
           sed -i -e 's/IMAGE/'"$IMAGE"'/' ./staging_env/deployment.yaml
           sed -i -e 's/GITHUB_SHA/'"$GITHUB_SHA"'/' ./staging_env/deployment.yaml
           ./kustomize build ./staging_env | kubectl apply -f -
+          kubectl apply -f ./server/staging_env/web-app-service.yaml
           kubectl rollout status deployment/$DEPLOYMENT_NAME -n staging
           kubectl get services -o wide -n staging
           kubectl get ingress  -o wide -n staging

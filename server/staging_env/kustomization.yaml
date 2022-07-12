@@ -9,4 +9,4 @@ resources:
   - postgres-service.yaml
   - postgres-deployment.yaml
   - service.yaml
-  - web-app-service.yaml
+  - deployment.yaml

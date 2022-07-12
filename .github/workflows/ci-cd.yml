@@ -73,16 +73,20 @@ jobs:
       - name: Deploy
         run: |
           gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GKE_PROJECT
-          sed -i   's/GKE_GCR/'"$GKE_GCR"'/' ./staging_env/deployment.yaml          
-          sed -i -e 's/REGISTRY_HOSTNAME/'"$REGISTRY_HOSTNAME"'/' ./staging_env/deployment.yaml
-          sed -i -e 's/IMAGE/'"$IMAGE"'/' ./staging_env/deployment.yaml
-          sed -i -e 's/GITHUB_SHA/'"$GITHUB_SHA"'/' ./staging_env/deployment.yaml
-          ./kustomize build ./staging_env | kubectl apply -f -
-          kubectl apply -f ./server/staging_env/web-app-service.yaml
-          kubectl rollout status deployment/$DEPLOYMENT_NAME -n staging
-          kubectl get services -o wide -n staging
-          kubectl get ingress  -o wide -n staging
-        working-directory: ${{ env.server }}          
+          sed -i -e 's/REGISTRY_HOSTNAME/'"$REGISTRY_HOSTNAME"'/' ./server/staging_env/deployment.yaml
+          sed -i   's/GKE_GCR/'"$GKE_GCR"'/' ./server/staging_env/deployment.yaml
+          sed -i -e 's/IMAGE/'"$IMAGE"'/' ./server/staging_env/deployment.yaml
+          sed -i -e 's/GITHUB_SHA/'"$GITHUB_SHA"'/' ./server/staging_env/deployment.yaml
+          sed -i -e 's/REGISTRY_HOSTNAME/'"$REGISTRY_HOSTNAME"'/' ./server/staging_env/deployment.yaml
+          kubectl apply -f ./server/staging_env/namespace.yaml 
+          kubectl apply -f ./server/staging_env/postgres-secret.yaml --namespace  staging
+          kubectl apply -f ./server/staging_env/postgres-configmap.yaml --namespace  staging
+          kubectl apply -f ./server/staging_env/postgres-pv.yaml --namespace  staging
+          kubectl apply -f ./server/staging_env/postgres-deployment.yaml --namespace  staging
+          kubectl apply -f ./server/staging_env/postgres-service.yaml --namespace  staging
+          kubectl apply -f ./server/staging_env/deployment.yaml --namespace  staging
+          kubectl apply -f ./server/staging_env/web-app-service.yaml --namespace  staging
+         
 
 
 

@@ -3,9 +3,9 @@ name: CI/CD
 on:
   pull_request:
     types: [closed]
-  # push:
+  #push:
 
-# Environment variables available to all jobs and steps in this workflow
+## Environment variables available to all jobs and steps in this workflow
 env:
   GKE_PROJECT: ${{ secrets.GKE_PROJECT }}
   GKE_EMAIL: ${{ secrets.GKE_EMAIL }}
@@ -74,7 +74,7 @@ jobs:
         run: |
           gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GKE_PROJECT
           sed -i -e 's/REGISTRY_HOSTNAME/'"$REGISTRY_HOSTNAME"'/' ./server/staging_env/deployment.yaml
-          sed -i -e  's/GKE_GCR/'"$GKE_GCR"'/' ./server/staging_env/deployment.yaml
+          sed -i   's/GKE_GCR/'"$GKE_GCR"'/' ./server/staging_env/deployment.yaml
 
           sed -i -e 's/IMAGE/'"$IMAGE"'/' ./server/staging_env/deployment.yaml
           sed -i -e 's/GITHUB_SHA/'"$GITHUB_SHA"'/' ./server/staging_env/deployment.yaml
@@ -83,7 +83,7 @@ jobs:
           sed -i -e 's/REGISTRY_HOSTNAME/'"$REGISTRY_HOSTNAME"'/' ./server/staging_env/deployment.yaml
 
 
-          kubectl apply -f ./server/staging_env/namespace.yaml 
+# kubectl apply -f ./server/staging_env/namespace.yaml 
 
           kubectl apply -f ./server/staging_env/deployment.yaml --namespace  staging
           kubectl apply -f ./server/staging_env/web-app-service.yaml --namespace  staging

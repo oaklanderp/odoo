@@ -83,7 +83,6 @@ jobs:
           sed -i -e 's/REGISTRY_HOSTNAME/'"$REGISTRY_HOSTNAME"'/' ./server/staging_env/deployment.yaml
 
 
-# kubectl apply -f ./server/staging_env/namespace.yaml 
 
           kubectl apply -f ./server/staging_env/deployment.yaml --namespace  staging
           kubectl apply -f ./server/staging_env/web-app-service.yaml --namespace  staging

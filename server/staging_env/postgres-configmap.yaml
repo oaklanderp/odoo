@@ -3,4 +3,5 @@ kind: ConfigMap
 metadata:
   name: postgres-configmap
   namespace: staging
+data:  
   database_url: postgres-service  

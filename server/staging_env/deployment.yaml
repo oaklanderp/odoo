@@ -45,10 +45,10 @@ spec:
                configMapKeyRef:
                  name: postgres-configmap  
                  key: database_url                      
-      #     volumeMounts:
-      #       - name: my-pvc
-      #         mountPath: "/mnt/data"
-      # volumes:
-      #   - name: my-pvc
-      #     persistentVolumeClaim:
-      #       claimName: nfs     
+          volumeMounts:
+            - name: my-pvc
+              mountPath: "/mnt/data"
+      volumes:
+        - name: my-pvc
+          persistentVolumeClaim:
+            claimName: postgresql-pv    

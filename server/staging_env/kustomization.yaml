@@ -8,5 +8,6 @@ resources:
   - postgres-configmap.yaml
   - postgres-secret.yaml
   - postgres-deployment.yaml
+  - deployment-pv.yaml
   - deployment.yaml
   - service.yaml

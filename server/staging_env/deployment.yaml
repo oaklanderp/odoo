@@ -52,3 +52,8 @@ spec:
         - name: my-pvc
           persistentVolumeClaim:
             claimName: postgresql-pv    
+
+
+
+
+

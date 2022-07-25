@@ -13,8 +13,8 @@ spec:
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: PersistentVolume-staging
-  namespace: stagingpv
+  name: stagingpv
+  namespace: staging
 spec:
   accessModes:
     - ReadWriteMany

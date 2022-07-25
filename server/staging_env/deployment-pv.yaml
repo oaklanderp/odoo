@@ -12,7 +12,7 @@ allowedTopologies:
       - key: failure-domain.beta.kubernetes.io/zone
         values:
           - europe-west1-b
-          # # - europe-west1-c
+          - europe-west1-c
            
          
 ---

@@ -13,6 +13,7 @@ OdooERP Webhooks
     'website': 'https://odooerp.ae/',
     'depends': ['base_automation'],
     'data': [
+        'data/mail_template_data.xml',
         'views/base_menus.xml',
         # 'views/ir_actions_views.xml',
     ],

@@ -27,9 +27,11 @@ class AccountMove(models.Model):
                 box_size=5,
                 border=0,
             )
+            qr.add_data("{'external_order_id': ")
             qr.add_data(rec.external_id)
-            qr.add_data(",")
+            qr.add_data(", 'action': '")
             qr.add_data(rec.action_id)
+            qr.add_data("'}")
             qr.make(fit=True)
             img = qr.make_image()
             temp = BytesIO()
